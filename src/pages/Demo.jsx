@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import {
   Play, Square, Zap, Users, Clock, TrendingUp, Brain, CheckCircle,
+  MessageSquare, Smartphone, Hash, QrCode, WifiOff, Wifi,
   ChevronRight, ArrowRight, Star, Globe, BarChart3, AlertTriangle, UserX,
   Timer, Smile
 } from 'lucide-react'
