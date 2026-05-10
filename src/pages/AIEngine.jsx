@@ -105,7 +105,7 @@ function ModelCard({ name, type, accuracy, status, trained, params }) {
             initial={{ width: 0 }}
             animate={{ width: `${accuracy}%` }}
             transition={{ duration: 1.5, ease: 'easeOut' }}
-            className="h-full bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"
+            className="h-full bg-blue-500 rounded-full"
           />
         </div>
         <div className="flex justify-between text-[10px] text-slate-600 pt-1">
