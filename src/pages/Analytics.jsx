@@ -128,7 +128,7 @@ function InstitutionsTable() {
                 <div className="flex items-center justify-end gap-2">
                   <div className="w-16 h-1.5 bg-white/10 rounded-full overflow-hidden">
                     <div
-                      className="h-full rounded-full bg-gradient-to-r from-blue-500 to-emerald-500"
+                      className="h-full rounded-full bg-blue-500"
                       style={{ width: `${inst.efficiency}%` }}
                     />
                   </div>
