@@ -73,7 +73,7 @@ function VisualProblem() {
             transition={{ delay: i * 0.05 }}
             className="w-10 h-10 rounded-full bg-red-500/20 border border-red-500/30 flex items-center justify-center text-lg"
           >
-            😤
+            <Clock size={20} className="text-red-400" />
           </motion.div>
         ))}
       </div>
@@ -240,10 +240,10 @@ function VisualOffline() {
 
 function VisualResult() {
   const metrics = [
-    { value: '50%', label: 'Wait Time Reduced', color: '#10b981', icon: '⏱️' },
-    { value: '40%', label: 'Efficiency Gained',  color: '#3b82f6', icon: '⚡' },
-    { value: '0',   label: 'Frustration Dropouts', color: '#8b5cf6', icon: '😊' },
-    { value: '4.9★', label: 'User Satisfaction',  color: '#f59e0b', icon: '⭐' },
+    { value: '50%', label: 'Wait Time Reduced', color: '#10b981', icon: <Clock size={28} color="#10b981" /> },
+    { value: '40%', label: 'Efficiency Gained',  color: '#3b82f6', icon: <TrendingUp size={28} color="#3b82f6" /> },
+    { value: '0',   label: 'Frustration Dropouts', color: '#8b5cf6', icon: <CheckCircle size={28} color="#8b5cf6" /> },
+    { value: '4.9/5', label: 'User Satisfaction',  color: '#f59e0b', icon: <Star size={28} color="#f59e0b" /> },
   ]
   return (
     <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto">
