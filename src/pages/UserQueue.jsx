@@ -364,6 +364,7 @@ function StepDetails({ institution, service, onJoined, onBack }) {
 
 function StepTicket({ ticket, position, onReset }) {
   const [showNotif, setShowNotif] = useState(false)
+  const [arrivingNotif, setArrivingNotif] = useState(false)
   const progress = Math.max(0, Math.min(100, ((10 - position) / 10) * 100))
   const Icon = resolveIcon(ticket.service?.icon || 'HelpCircle')
 
@@ -455,6 +456,7 @@ function StepTicket({ ticket, position, onReset }) {
               <Clock size={14} /> Need More Time
             </button>
             <button
+              onClick={() => setArrivingNotif(true)}
               className="flex items-center justify-center gap-2 py-3 rounded text-sm font-semibold text-white transition-all"
               style={{ background: 'var(--color-accent)' }}
             >
@@ -500,6 +502,25 @@ function StepTicket({ ticket, position, onReset }) {
               New wait: ~{ticket.waitTime + 12} min. SMS sent.
             </p>
             <button onClick={() => setShowNotif(false)} style={{ color: 'var(--text-muted)' }}>
+              <X size={14} />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Arriving notification */}
+      <AnimatePresence>
+        {arrivingNotif && (
+          <motion.div
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 12 }}
+            className="mt-4 glass rounded-xl p-4 flex items-center gap-3"
+            style={{ borderColor: 'var(--color-accent)' }}
+          >
+            <MapPin size={15} style={{ color: 'var(--color-accent)' }} className="shrink-0" />
+            <p className="text-sm flex-1" style={{ color: 'var(--text-secondary)' }}>
+              <span className="font-semibold" style={{ color: 'var(--color-accent)' }}>Arrival confirmed</span>. Staff have been notified you are at the location. Please wait in the lobby.
+            </p>
+            <button onClick={() => setArrivingNotif(false)} style={{ color: 'var(--text-muted)' }}>
               <X size={14} />
             </button>
           </motion.div>
