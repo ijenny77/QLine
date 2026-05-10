@@ -28,7 +28,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2.5 group">
             <div className="relative">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/30">
+              <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/30">
                 <span className="text-white font-black text-sm">Q</span>
               </div>
               {isDemoMode && (
@@ -85,7 +85,7 @@ export default function Navbar() {
 
             <Link
               to="/demo"
-              className="hidden md:flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg text-sm font-semibold text-white hover:opacity-90 transition-all shadow-lg shadow-purple-500/20"
+              className="hidden md:flex items-center gap-1.5 px-4 py-2 bg-blue-600 rounded-lg text-sm font-semibold text-white hover:opacity-90 transition-all shadow-lg shadow-blue-500/20"
             >
               <Zap size={14} />
               Live Demo
@@ -130,7 +130,7 @@ export default function Navbar() {
               <Link
                 to="/demo"
                 onClick={() => setOpen(false)}
-                className="flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 mt-2"
+                className="flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-semibold text-white bg-blue-600 mt-2"
               >
                 <Zap size={14} /> Live Demo
               </Link>
