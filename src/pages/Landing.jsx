@@ -11,7 +11,6 @@ import {
 import { testimonials, pricingPlans, marketSectors } from '../data/mockData'
 import Footer from '../components/layout/Footer'
 
-// ── Animation variants ────────────────────────────────────────────────────────
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   show:   { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
@@ -42,7 +41,6 @@ function Section({ children, className = '' }) {
 function DashboardPreview() {
   return (
     <div className="relative max-w-2xl mx-auto">
-      {/* Glow */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-cyan-500/20 blur-3xl rounded-3xl" />
 
       <motion.div
@@ -50,7 +48,6 @@ function DashboardPreview() {
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
         className="relative glass border border-white/15 rounded-3xl p-6 shadow-2xl"
       >
-        {/* Header bar */}
         <div className="flex items-center justify-between mb-6">
           <div>
             <div className="text-xs text-slate-500 mb-1">NOW SERVING</div>
@@ -68,7 +65,6 @@ function DashboardPreview() {
           </div>
         </div>
 
-        {/* Queue bars */}
         <div className="space-y-2 mb-6">
           {[
             { name: 'Amara D.',  wait: '0 min',   status: 'serving', w: '100%' },
@@ -104,7 +100,6 @@ function DashboardPreview() {
           ))}
         </div>
 
-        {/* AI alert */}
         <motion.div
           animate={{ opacity: [0.7, 1, 0.7] }}
           transition={{ duration: 2, repeat: Infinity }}
@@ -118,7 +113,6 @@ function DashboardPreview() {
         </motion.div>
       </motion.div>
 
-      {/* Floating stat cards */}
       <motion.div
         animate={{ y: [0, -6, 0], x: [0, 4, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
@@ -144,16 +138,13 @@ function DashboardPreview() {
   )
 }
 
-// ── HERO ──────────────────────────────────────────────────────────────────────
 function Hero() {
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-16 overflow-hidden">
-      {/* Background gradients */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl" />
         <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-purple-600/15 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-cyan-600/10 rounded-full blur-3xl" />
-        {/* Grid pattern */}
         <div className="absolute inset-0 opacity-[0.03]"
           style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
         />
@@ -161,20 +152,16 @@ function Hero() {
 
       <div className="relative z-10 max-w-7xl mx-auto w-full">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-
-          {/* Left copy */}
           <motion.div
             initial="hidden"
             animate="show"
             variants={stagger}
           >
-            {/* Tag */}
             <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-6">
               <span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
               AI-Powered Queue Management for Africa
             </motion.div>
 
-            {/* Headline */}
             <motion.h1 variants={fadeUp} className="font-display font-black text-5xl lg:text-7xl leading-[1.05] mb-6" style={{ color: 'var(--text-primary)' }}>
               Transform
               <br />
@@ -183,12 +170,10 @@ function Hero() {
               Waits
             </motion.h1>
 
-            {/* Subtext */}
             <motion.p variants={fadeUp} className="text-lg leading-relaxed mb-8 max-w-lg" style={{ color: 'var(--text-secondary)' }}>
-              QLine eliminates the endless queue. Join remotely via SMS, USSD, QR code, or app — and arrive exactly when you're needed. No more wasted hours.
+              QLine eliminates the endless queue. Join remotely via SMS, USSD, QR code, or app  and arrive exactly when you're needed. No more wasted hours.
             </motion.p>
 
-            {/* CTAs */}
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4 mb-10">
               <Link to="/demo" className="btn-primary text-base px-8 py-4">
                 <Zap size={18} /> Start Live Demo
@@ -198,7 +183,6 @@ function Hero() {
               </Link>
             </motion.div>
 
-            {/* Stats row */}
             <motion.div variants={fadeUp} className="flex flex-wrap gap-8">
               {[
                 { value: '50%', label: 'Less Waiting' },
@@ -214,7 +198,6 @@ function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Right — dashboard preview */}
           <motion.div
             initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
@@ -224,7 +207,6 @@ function Hero() {
           </motion.div>
         </div>
 
-        {/* Channel pills */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -249,7 +231,6 @@ function Hero() {
   )
 }
 
-// ── PROBLEM ───────────────────────────────────────────────────────────────────
 function Problem() {
   const problems = [
     { icon: Timer,     stat: '3–5 hrs', desc: 'Average queue wait in African hospitals and government offices' },
@@ -288,7 +269,6 @@ function Problem() {
   )
 }
 
-// ── SOLUTION ──────────────────────────────────────────────────────────────────
 function Solution() {
   const steps = [
     { n: '01', title: 'Join Remotely',  desc: 'Via app, SMS, USSD *384#, QR code, or staff-assisted — whichever works for you.',   icon: Smartphone },
@@ -309,7 +289,6 @@ function Solution() {
         </motion.div>
 
         <div className="relative grid md:grid-cols-4 gap-8">
-          {/* Connector */}
           <div className="absolute top-10 left-[12%] right-[12%] h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent hidden md:block" />
 
           {steps.map((step, i) => (
@@ -330,7 +309,6 @@ function Solution() {
   )
 }
 
-// ── FEATURES ──────────────────────────────────────────────────────────────────
 function Features() {
   const features = [
     { icon: Brain,     title: 'AI Wait Prediction',       desc: 'Machine learning model trained on 2M+ queue events predicts wait times with 94% accuracy.',         badge: 'AI Core'   },
@@ -374,7 +352,6 @@ function Features() {
   )
 }
 
-// ── MARKET SECTORS ────────────────────────────────────────────────────────────
 function MarketSectors() {
   const sectorIcons = { Cross, Building2, Landmark, GraduationCap, ShoppingBag, Wifi }
 
@@ -413,7 +390,6 @@ function MarketSectors() {
   )
 }
 
-// ── IMPACT ────────────────────────────────────────────────────────────────────
 function Impact() {
   const stats = [
     { value: '2.4M+', label: 'Users Served',        sub: 'across 6 countries',        color: 'text-blue-400' },
@@ -449,7 +425,6 @@ function Impact() {
   )
 }
 
-// ── TESTIMONIALS ──────────────────────────────────────────────────────────────
 function Testimonials() {
   return (
     <Section className="py-24 px-6 bg-gradient-to-b from-transparent via-blue-950/10 to-transparent">
@@ -496,8 +471,6 @@ function Testimonials() {
     </Section>
   )
 }
-
-// ── PRICING ───────────────────────────────────────────────────────────────────
 function Pricing() {
   return (
     <Section className="py-24 px-6" id="pricing">

@@ -8,7 +8,7 @@ import {
 } from 'lucide-react'
 import { useQueueStore } from '../store/queueStore'
 
-// ── Story sequence ─────────────────────────────────────────────────────────────
+
 const STORY = [
   {
     id: 0,
@@ -60,7 +60,7 @@ const STORY = [
   },
 ]
 
-// ── Visual components for each story beat ────────────────────────────────────
+
 function VisualProblem() {
   return (
     <div className="flex flex-col items-center gap-6">
@@ -339,10 +339,8 @@ export default function Demo() {
           </p>
         </div>
 
-        {/* Main demo stage */}
         <div className="glass border border-white/10 rounded-3xl overflow-hidden mb-8">
 
-          {/* Progress bar */}
           <div className="h-1 bg-white/5">
             <motion.div
               className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
@@ -351,7 +349,6 @@ export default function Demo() {
             />
           </div>
 
-          {/* Story steps indicator */}
           <div className="flex items-center gap-2 px-6 py-4 border-b border-white/5 overflow-x-auto">
             {STORY.map((s, i) => (
               <button
@@ -367,7 +364,6 @@ export default function Demo() {
             ))}
           </div>
 
-          {/* Visual area */}
           <div className="p-8 min-h-72 flex flex-col items-center justify-center">
             <AnimatePresence mode="wait">
               <motion.div
@@ -385,13 +381,11 @@ export default function Demo() {
                   <p className="text-slate-400 leading-relaxed">{current.narrative}</p>
                 </div>
 
-                {/* Visual */}
                 {running && <VisualComponent />}
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Controls */}
           <div className="px-6 py-5 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               {!running ? (
@@ -426,7 +420,6 @@ export default function Demo() {
           </div>
         </div>
 
-        {/* Quick feature cards */}
         <div className="grid md:grid-cols-3 gap-5 mb-10">
           {[
             { icon: Users,    title: 'Live Queue Simulation', desc: 'Watch users join from app, SMS, USSD, and QR code in real time.',        link: '/queue',     cta: 'Try Queue' },
@@ -451,7 +444,6 @@ export default function Demo() {
           ))}
         </div>
 
-        {/* Investor pitch deck CTA */}
         <div className="glass border border-purple-500/30 bg-purple-500/5 p-8 rounded-3xl text-center">
           <Star size={32} className="text-yellow-400 mx-auto mb-4" />
           <h2 className="font-display font-black text-3xl text-white mb-3">

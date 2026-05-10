@@ -12,7 +12,6 @@ import {
 import { useQueueStore } from '../store/queueStore'
 import { waitTimeData } from '../data/mockData'
 
-// ── Stat card ─────────────────────────────────────────────────────────────────
 function StatCard({ icon: Icon, label, value, sub, color, trend }) {
   return (
     <motion.div
@@ -38,7 +37,6 @@ function StatCard({ icon: Icon, label, value, sub, color, trend }) {
   )
 }
 
-// ── AI Insight card ───────────────────────────────────────────────────────────
 function AIInsightCard({ insight }) {
   const colors = {
     warning: { bg: 'bg-yellow-500/10', border: 'border-yellow-500/30', text: 'text-yellow-400', badge: 'badge-yellow' },
@@ -69,7 +67,6 @@ function AIInsightCard({ insight }) {
   )
 }
 
-// ── Queue row ─────────────────────────────────────────────────────────────────
 function QueueRow({ user, onReposition }) {
   const channelColors = {
     app:    { color: '#3b82f6', label: 'App' },
@@ -91,7 +88,6 @@ function QueueRow({ user, onReposition }) {
           user.status === 'delayed' ? 'bg-yellow-500/10 border border-yellow-500/20' :
           'bg-white/3 hover:bg-white/6 border border-transparent'}`}
     >
-      {/* Position badge */}
       <div className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold shrink-0
         ${user.status === 'serving' ? 'bg-emerald-500 text-white' :
           user.status === 'delayed' ? 'bg-yellow-500 text-dark-900' :
@@ -99,7 +95,6 @@ function QueueRow({ user, onReposition }) {
         {user.position}
       </div>
 
-      {/* Name + ticket */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-0.5">
           <span className="font-medium text-white text-sm truncate">{user.name}</span>
@@ -115,7 +110,6 @@ function QueueRow({ user, onReposition }) {
         </div>
       </div>
 
-      {/* Actions */}
       {user.status === 'delayed' && (
         <button
           onClick={() => onReposition(user.id)}
@@ -128,7 +122,6 @@ function QueueRow({ user, onReposition }) {
   )
 }
 
-// ── Counter card ──────────────────────────────────────────────────────────────
 function CounterCard({ counter }) {
   const statusConfig = {
     active: { color: '#10b981', label: 'Active',  bg: 'bg-emerald-500/10 border-emerald-500/30' },
@@ -165,7 +158,6 @@ function CounterCard({ counter }) {
   )
 }
 
-// ── MAIN DASHBOARD ────────────────────────────────────────────────────────────
 export default function StaffDashboard() {
   const {
     queue, currentServing, totalToday, avgWaitTime, aiEfficiency,
@@ -198,8 +190,6 @@ export default function StaffDashboard() {
   return (
     <div className="min-h-screen pt-20 px-4 lg:px-8 pb-16">
       <div className="max-w-7xl mx-auto">
-
-        {/* ── Header ── */}
         <div className="flex flex-wrap items-center justify-between gap-4 py-6 border-b border-white/5 mb-8">
           <div>
             <h1 className="font-display font-black text-2xl lg:text-3xl text-white">Staff Dashboard</h1>
@@ -210,7 +200,6 @@ export default function StaffDashboard() {
           </div>
 
           <div className="flex items-center gap-3 flex-wrap">
-            {/* Offline badge */}
             {isOffline && (
               <motion.div
                 initial={{ scale: 0.8 }} animate={{ scale: 1 }}
@@ -222,12 +211,10 @@ export default function StaffDashboard() {
               </motion.div>
             )}
 
-            {/* Call next */}
             <button onClick={handleCallNext} className="btn-primary px-5 py-2.5 text-sm">
               <SkipForward size={16} /> Call Next
             </button>
 
-            {/* Add walk-in */}
             <button
               onClick={() => setShowWalkIn(!showWalkIn)}
               className="btn-secondary px-5 py-2.5 text-sm"
@@ -237,7 +224,6 @@ export default function StaffDashboard() {
           </div>
         </div>
 
-        {/* Walk-in input panel */}
         <AnimatePresence>
           {showWalkIn && (
             <motion.div
@@ -268,7 +254,6 @@ export default function StaffDashboard() {
           )}
         </AnimatePresence>
 
-        {/* ── Stats row ── */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <StatCard icon={Users}     label="Total Today"     value={totalToday}      color="#3b82f6" trend={12}  />
           <StatCard icon={Clock}     label="Avg Wait Time"   value={`${avgWaitTime}m`} sub="per user" color="#8b5cf6" trend={-8} />
@@ -276,13 +261,10 @@ export default function StaffDashboard() {
           <StatCard icon={Zap}       label="AI Efficiency"   value={`${aiEfficiency}%`} color="#10b981" trend={3} />
         </div>
 
-        {/* ── Main layout ── */}
         <div className="grid lg:grid-cols-3 gap-6">
 
-          {/* Left: Queue + counters */}
           <div className="lg:col-span-2 space-y-6">
 
-            {/* Now serving banner */}
             {serving && (
               <motion.div
                 key={serving.id}
@@ -312,7 +294,6 @@ export default function StaffDashboard() {
               </motion.div>
             )}
 
-            {/* Tab bar */}
             <div className="flex items-center gap-2">
               {[
                 { id: 'queue',    label: 'Live Queue',   count: waiting.length },
@@ -336,7 +317,6 @@ export default function StaffDashboard() {
               )}
             </div>
 
-            {/* Queue list */}
             {tab === 'queue' && (
               <div className="glass rounded-2xl overflow-hidden">
                 <div className="p-4 border-b border-white/5 flex items-center justify-between">
@@ -362,7 +342,6 @@ export default function StaffDashboard() {
               </div>
             )}
 
-            {/* Counters */}
             {tab === 'counters' && (
               <div className="grid grid-cols-2 gap-4">
                 {activeCounters.map(counter => (
@@ -371,7 +350,6 @@ export default function StaffDashboard() {
               </div>
             )}
 
-            {/* Mini chart */}
             <div className="glass p-5 rounded-2xl">
               <div className="flex items-center justify-between mb-4">
                 <span className="font-semibold text-white text-sm">Today's Queue Flow</span>
@@ -398,10 +376,8 @@ export default function StaffDashboard() {
             </div>
           </div>
 
-          {/* Right: AI panel */}
           <div className="space-y-6">
 
-            {/* AI insights */}
             <div className="glass p-5 rounded-2xl">
               <div className="flex items-center gap-2 mb-4">
                 <div className="p-1.5 rounded-lg bg-purple-500/20">
@@ -417,7 +393,6 @@ export default function StaffDashboard() {
               </div>
             </div>
 
-            {/* Offline sync panel */}
             {isOffline && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -438,7 +413,6 @@ export default function StaffDashboard() {
               </motion.div>
             )}
 
-            {/* Quick stats */}
             <div className="glass p-5 rounded-2xl space-y-4">
               <span className="font-semibold text-white text-sm">Quick Stats</span>
               {[

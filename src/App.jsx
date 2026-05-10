@@ -11,14 +11,12 @@ import AIEngine  from './pages/AIEngine'
 import Demo      from './pages/Demo'
 import { useQueueStore } from './store/queueStore'
 
-// Scroll to top on route change
 function ScrollReset() {
   const { pathname } = useLocation()
   useEffect(() => { window.scrollTo(0, 0) }, [pathname])
   return null
 }
 
-// Page transition wrapper
 function PageWrapper({ children }) {
   return (
     <motion.div
@@ -40,8 +38,6 @@ function AppRoutes() {
     <>
       <ScrollReset />
       <Navbar />
-
-      {/* Offline banner */}
       <AnimatePresence>
         {isOffline && (
           <motion.div

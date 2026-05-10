@@ -185,7 +185,6 @@ export default function Analytics() {
           </div>
         </div>
 
-        {/* KPI row */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {[
             { label: 'Total Users',     value: '5,247',  delta: '+18%', color: '#3b82f6' },

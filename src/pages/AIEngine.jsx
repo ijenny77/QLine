@@ -29,7 +29,7 @@ const typeConfig = {
   accuracy: { color: '#10b981', bg: 'bg-emerald-500/10 border-emerald-500/20',badge: 'badge-green', icon: CheckCircle },
 }
 
-// ── Real-time AI chart data ───────────────────────────────────────────────────
+
 function useRealtimeData(base, spread = 10, interval = 1500) {
   const [data, setData] = useState(() =>
     Array.from({ length: 20 }, (_, i) => ({
@@ -80,7 +80,7 @@ function ConfidenceMeter({ value, label, color }) {
   )
 }
 
-// ── ML model card ─────────────────────────────────────────────────────────────
+
 function ModelCard({ name, type, accuracy, status, trained, params }) {
   return (
     <div className="glass p-5 rounded-2xl hover:bg-white/8 transition-all">
@@ -117,7 +117,6 @@ function ModelCard({ name, type, accuracy, status, trained, params }) {
   )
 }
 
-// ── MAIN PAGE ─────────────────────────────────────────────────────────────────
 export default function AIEngine() {
   const [feedItems, setFeedItems] = useState(predictionFeed.slice(0, 3))
   const [feedIdx, setFeedIdx]     = useState(3)
@@ -186,7 +185,6 @@ export default function AIEngine() {
           {/* Real-time charts */}
           <div className="lg:col-span-2 space-y-5">
 
-            {/* Wait time */}
             <div className="glass p-5 rounded-2xl">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
@@ -212,7 +210,6 @@ export default function AIEngine() {
               </ResponsiveContainer>
             </div>
 
-            {/* Efficiency + Congestion */}
             <div className="grid grid-cols-2 gap-5">
               <div className="glass p-5 rounded-2xl">
                 <div className="flex items-center gap-2 mb-3">
@@ -249,7 +246,6 @@ export default function AIEngine() {
             </div>
           </div>
 
-          {/* AI Prediction feed */}
           <div className="glass p-5 rounded-2xl">
             <div className="flex items-center gap-2 mb-4">
               <div className="relative">
@@ -288,7 +284,6 @@ export default function AIEngine() {
           </div>
         </div>
 
-        {/* ML Models */}
         <div className="mb-8">
           <h2 className="font-display font-bold text-xl text-white mb-5">Deployed ML Models</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -301,7 +296,6 @@ export default function AIEngine() {
           </div>
         </div>
 
-        {/* AI Architecture */}
         <div className="glass p-8 rounded-2xl">
           <h2 className="font-display font-bold text-xl text-white mb-6">AI Architecture</h2>
           <div className="grid md:grid-cols-3 gap-8">

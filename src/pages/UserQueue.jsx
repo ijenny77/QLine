@@ -11,7 +11,6 @@ import {
 import { useQueueStore } from '../store/queueStore'
 import { smsConversation, ussdFlow, serviceInstitutions } from '../data/mockData'
 
-// ── Icon resolver (service icons are stored as strings in data) ───────────────
 const ICON_MAP = {
   UserPlus, Banknote, TrendingUp, Globe, CreditCard, HelpCircle,
   Smartphone, FileText, Package, Receipt, Pill, ScanLine, Siren,
@@ -24,7 +23,6 @@ const ICON_MAP = {
 }
 const resolveIcon = (name) => ICON_MAP[name] || HelpCircle
 
-// ── Sector config ─────────────────────────────────────────────────────────────
 const SECTORS = ['All', 'Banking', 'Healthcare', 'Government', 'Telecoms']
 const SECTOR_COLORS = {
   Banking:    '#3b82f6',
@@ -34,9 +32,6 @@ const SECTOR_COLORS = {
   Retail:     '#f59e0b',
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// STEP 1 — Institution picker
-// ─────────────────────────────────────────────────────────────────────────────
 function StepInstitution({ onSelect }) {
   const [search,      setSearch]      = useState('')
   const [sector,      setSector]      = useState('All')
@@ -92,7 +87,6 @@ function StepInstitution({ onSelect }) {
         </div>
       </div>
 
-      {/* Institution grid */}
       {filtered.length === 0 ? (
         <div className="text-center py-16" style={{ color: 'var(--text-muted)' }}>
           <Search size={32} className="mx-auto mb-3 opacity-30" />
@@ -111,7 +105,7 @@ function StepInstitution({ onSelect }) {
               className="glass text-left p-5 rounded-2xl transition-all duration-200 group w-full"
               style={highlighted === inst.id ? { borderColor: inst.color + '60', background: inst.color + '08' } : {}}
             >
-              {/* Logo + sector */}
+
               <div className="flex items-start justify-between mb-4">
                 <div
                   className="w-12 h-12 rounded-xl flex items-center justify-center font-display font-black text-sm text-white shrink-0 shadow-sm"
@@ -138,7 +132,7 @@ function StepInstitution({ onSelect }) {
                 <span className="text-xs">{inst.city}, {inst.country}</span>
               </div>
 
-              {/* Live stats */}
+
               <div className="grid grid-cols-2 gap-2">
                 <div className="glass p-2.5 rounded-xl text-center">
                   <div className="font-bold text-base" style={{ color: 'var(--text-primary)' }}>{inst.queueSize}</div>
@@ -168,9 +162,6 @@ function StepInstitution({ onSelect }) {
   )
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// STEP 2 — Service picker
-// ─────────────────────────────────────────────────────────────────────────────
 function StepService({ institution, onSelect, onBack }) {
   const [hovered, setHovered] = useState(null)
 
@@ -259,9 +250,6 @@ function StepService({ institution, onSelect, onBack }) {
   )
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// STEP 3 — Details form
-// ─────────────────────────────────────────────────────────────────────────────
 function StepDetails({ institution, service, onJoined, onBack }) {
   const [name,    setName]    = useState('')
   const [channel, setChannel] = useState('app')
@@ -294,7 +282,6 @@ function StepDetails({ institution, service, onJoined, onBack }) {
       transition={{ duration: 0.3 }}
       className="max-w-md mx-auto"
     >
-      {/* Summary card */}
       <div className="glass p-4 rounded-2xl mb-6">
         <div className="flex items-center gap-3">
           <div
@@ -375,9 +362,6 @@ function StepDetails({ institution, service, onJoined, onBack }) {
   )
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// STEP 4 — Ticket display
-// ─────────────────────────────────────────────────────────────────────────────
 function StepTicket({ ticket, position, onReset }) {
   const [showNotif, setShowNotif] = useState(false)
   const progress = Math.max(0, Math.min(100, ((10 - position) / 10) * 100))
@@ -396,14 +380,12 @@ function StepTicket({ ticket, position, onReset }) {
         className="glass rounded-3xl overflow-hidden shadow-xl"
         style={{ borderColor: (ticket.institution?.color || '#3b82f6') + '40' }}
       >
-        {/* Top colour strip */}
         <div
           className="h-2"
           style={{ background: `linear-gradient(to right, ${ticket.institution?.color || '#3b82f6'}, #7c3aed, #06b6d4)` }}
         />
 
         <div className="p-7">
-          {/* Institution + service */}
           <div className="flex items-start justify-between mb-6">
             <div className="flex items-center gap-3">
               <div
@@ -431,13 +413,11 @@ function StepTicket({ ticket, position, onReset }) {
             <div className="font-display font-black text-6xl queue-number">{ticket.ticketId}</div>
           </div>
 
-          {/* Position */}
           <div className="text-center mb-5">
             <div className="text-xs uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)' }}>Queue Position</div>
             <div className="font-display font-black text-5xl" style={{ color: 'var(--text-primary)' }}>#{position}</div>
           </div>
 
-          {/* Progress */}
           <div className="mb-5">
             <div className="flex justify-between text-xs mb-1.5" style={{ color: 'var(--text-muted)' }}>
               <span>Progress to front</span><span>{Math.round(progress)}%</span>
@@ -453,7 +433,6 @@ function StepTicket({ ticket, position, onReset }) {
             </div>
           </div>
 
-          {/* Stats */}
           <div className="grid grid-cols-3 gap-3 mb-5">
             {[
               { label: 'Est. Wait',   value: `${ticket.waitTime}m` },
@@ -467,7 +446,6 @@ function StepTicket({ ticket, position, onReset }) {
             ))}
           </div>
 
-          {/* Action buttons */}
           <div className="grid grid-cols-2 gap-3">
             <button
               onClick={() => setShowNotif(true)}
@@ -485,12 +463,10 @@ function StepTicket({ ticket, position, onReset }) {
           </div>
         </div>
 
-        {/* Ticket tear line */}
         <div className="relative flex items-center mx-6 my-0">
           <div className="flex-1 border-t border-dashed" style={{ borderColor: 'var(--glass-border)' }} />
         </div>
 
-        {/* Footer / barcode */}
         <div className="px-7 py-4 flex items-center justify-between">
           <span className="text-[10px] font-mono" style={{ color: 'var(--text-muted)' }}>QLine v2 · AF-KE</span>
           <div className="flex gap-px">

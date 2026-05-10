@@ -1,8 +1,6 @@
-// ─── Analytics mock data ──────────────────────────────────────────────────────
-
 export const waitTimeData = [
-  { time: '8 AM', before: 42, after: 18, ai_prediction: 20 },
-  { time: '9 AM', before: 55, after: 22, ai_prediction: 24 },
+  { time: '8 AM',  before: 42, after: 18, ai_prediction: 20 },
+  { time: '9 AM',  before: 55, after: 22, ai_prediction: 24 },
   { time: '10 AM', before: 68, after: 28, ai_prediction: 26 },
   { time: '11 AM', before: 71, after: 31, ai_prediction: 30 },
   { time: '12 PM', before: 85, after: 35, ai_prediction: 33 },
@@ -65,24 +63,24 @@ export const aiAccuracy = [
 ]
 
 export const institutions = [
-  { id: 1, name: 'Aga Khan Hospital',     sector: 'Healthcare', city: 'Nairobi',  country: 'Kenya',   users: 482,  avgWait: 14, efficiency: 91 },
-  { id: 2, name: 'Equity Bank HQ',        sector: 'Banking',    city: 'Nairobi',  country: 'Kenya',   users: 318,  avgWait: 18, efficiency: 88 },
-  { id: 3, name: 'Accra Passport Office', sector: 'Government', city: 'Accra',    country: 'Ghana',   users: 621,  avgWait: 22, efficiency: 82 },
-  { id: 4, name: 'Lagos NIS Office',      sector: 'Government', city: 'Lagos',    country: 'Nigeria', users: 891,  avgWait: 28, efficiency: 78 },
-  { id: 5, name: 'Absa Bank Cape Town',   sector: 'Banking',    city: 'Cape Town',country: 'S. Africa',users: 254, avgWait: 11, efficiency: 94 },
-  { id: 6, name: 'CHUK Hospital',         sector: 'Healthcare', city: 'Kigali',   country: 'Rwanda',  users: 376,  avgWait: 16, efficiency: 89 },
+  { id: 1, name: 'Aga Khan Hospital',     sector: 'Healthcare', city: 'Nairobi',   country: 'Kenya',     users: 482, avgWait: 14, efficiency: 91 },
+  { id: 2, name: 'Equity Bank HQ',        sector: 'Banking',    city: 'Nairobi',   country: 'Kenya',     users: 318, avgWait: 18, efficiency: 88 },
+  { id: 3, name: 'Accra Passport Office', sector: 'Government', city: 'Accra',     country: 'Ghana',     users: 621, avgWait: 22, efficiency: 82 },
+  { id: 4, name: 'Lagos NIS Office',      sector: 'Government', city: 'Lagos',     country: 'Nigeria',   users: 891, avgWait: 28, efficiency: 78 },
+  { id: 5, name: 'Absa Bank Cape Town',   sector: 'Banking',    city: 'Cape Town', country: 'S. Africa', users: 254, avgWait: 11, efficiency: 94 },
+  { id: 6, name: 'CHUK Hospital',         sector: 'Healthcare', city: 'Kigali',    country: 'Rwanda',    users: 376, avgWait: 16, efficiency: 89 },
 ]
 
 export const smsConversation = [
-  { from: 'user',   text: 'JOIN EQUITY',                          time: '09:01' },
+  { from: 'user',   text: 'JOIN EQUITY',                                                                                                                          time: '09:01' },
   { from: 'system', text: 'Welcome to Equity Bank Queue System!\nYour ticket: QL-4855\nPosition: #14\nEst. wait: 52 mins\nReply WAIT to hold or STATUS for updates.', time: '09:01' },
-  { from: 'user',   text: 'STATUS',                               time: '09:28' },
-  { from: 'system', text: 'QL-4855 Update:\nPosition: #8\nEst. wait: 28 mins\nNow serving #6.\nReply DELAY if you need more time.', time: '09:28' },
-  { from: 'user',   text: 'DELAY',                                time: '09:45' },
-  { from: 'system', text: 'Got it! AI has repositioned you to #11.\nNew ETA: 35 mins.\nWe\'ll notify you 10 mins before your turn.', time: '09:45' },
-  { from: 'system', text: 'ALERT: QL-4855 — You\'re next in 10 minutes!\nHead to Equity Bank now. Counter B is ready.\nReply HERE when you arrive.', time: '10:22' },
-  { from: 'user',   text: 'HERE',                                 time: '10:29' },
-  { from: 'system', text: 'Perfect! Walk to Counter B immediately.\nStaff is ready for you.\nThank you for using QLine!', time: '10:29' },
+  { from: 'user',   text: 'STATUS',                                                                                                                               time: '09:28' },
+  { from: 'system', text: 'QL-4855 Update:\nPosition: #8\nEst. wait: 28 mins\nNow serving #6.\nReply DELAY if you need more time.',                               time: '09:28' },
+  { from: 'user',   text: 'DELAY',                                                                                                                                time: '09:45' },
+  { from: 'system', text: "Got it! AI has repositioned you to #11.\nNew ETA: 35 mins.\nWe'll notify you 10 mins before your turn.",                               time: '09:45' },
+  { from: 'system', text: 'ALERT: QL-4855 — You\'re next in 10 minutes!\nHead to Equity Bank now. Counter B is ready.\nReply HERE when you arrive.',              time: '10:22' },
+  { from: 'user',   text: 'HERE',                                                                                                                                 time: '10:29' },
+  { from: 'system', text: 'Perfect! Walk to Counter B immediately.\nStaff is ready for you.\nThank you for using QLine!',                                         time: '10:29' },
 ]
 
 export const ussdFlow = {
@@ -96,44 +94,44 @@ export const ussdFlow = {
   },
   confirm: {
     title: 'Queue Joined!',
-    body: 'Ticket: QL-4901\nPosition: #19\nWait: ~68 mins\nYou\'ll get SMS alerts.\n0. Exit',
+    body: "Ticket: QL-4901\nPosition: #19\nWait: ~68 mins\nYou'll get SMS alerts.\n0. Exit",
   },
 }
 
 export const testimonials = [
   {
-    name: 'Dr. Wanjiru Kamau',
-    role: 'Head of Operations, Aga Khan Hospital',
-    country: 'Kenya',
-    avatar: 'WK',
-    text: 'QLine reduced our outpatient wait times by 58%. Patients no longer crowd corridors. The AI predictions are remarkably accurate.',
+    name: 'Mizero Anne Line',
+    role: 'Head of Patient Services, CHUK Hospital',
+    country: 'Rwanda',
+    avatar: 'ML',
+    text: 'QLine reduced our outpatient wait times by 58%. Patients no longer crowd corridors — they wait comfortably outside and arrive when called. The AI predictions are remarkably accurate.',
     rating: 5,
     metric: '58% wait reduction',
   },
   {
-    name: 'Kweku Mensah',
-    role: 'Branch Manager, Absa Bank',
-    country: 'Ghana',
-    avatar: 'KM',
-    text: 'Our NPS score jumped from 42 to 78 within 3 months. Customers trust us more because we respect their time. QLine is a game-changer.',
+    name: 'Iranzi Samuella',
+    role: 'Branch Operations Manager, Bank of Kigali',
+    country: 'Rwanda',
+    avatar: 'IS',
+    text: 'Our customer satisfaction score jumped from 44 to 81 within three months. People trust us more because we finally respect their time. QLine is genuinely transformative.',
     rating: 5,
-    metric: '86pt NPS improvement',
+    metric: '37pt CSAT improvement',
   },
   {
-    name: 'Amara Diallo',
-    role: 'Director, Dakar Passport Agency',
-    country: 'Senegal',
-    avatar: 'AD',
-    text: 'Even citizens without smartphones can join remotely via USSD. This is true inclusive technology for Africa. We\'ve served 40% more people daily.',
+    name: 'Ishya Rugema Achille',
+    role: 'Director of Digital Services, RRA',
+    country: 'Rwanda',
+    avatar: 'IA',
+    text: 'Citizens without smartphones can still join remotely via USSD. That inclusivity matters here. Since deploying QLine, we process 40% more taxpayers daily without additional staff.',
     rating: 5,
     metric: '40% throughput increase',
   },
   {
-    name: 'Chidinma Okonkwo',
-    role: 'Patient Experience Lead, LUTH',
-    country: 'Nigeria',
-    avatar: 'CO',
-    text: 'The offline capability was critical for us. Internet outages no longer stop our operations. The system keeps working and syncs when connection returns.',
+    name: 'Hashimweyesu JD',
+    role: 'IT & Operations Lead, Equity Bank Rwanda',
+    country: 'Rwanda',
+    avatar: 'HJ',
+    text: 'The offline capability was critical for us — internet outages used to halt everything. Now the system keeps working and syncs automatically when connectivity returns. Rock solid.',
     rating: 5,
     metric: '99.2% uptime achieved',
   },
@@ -173,15 +171,14 @@ export const pricingPlans = [
 ]
 
 export const marketSectors = [
-  { icon: 'Cross',        name: 'Healthcare',   desc: 'Hospitals, clinics, labs',        color: '#ef4444', count: '2,400+ facilities' },
-  { icon: 'Building2',    name: 'Banking',      desc: 'Banks, SACCOs, MFIs',             color: '#3b82f6', count: '8,200+ branches' },
-  { icon: 'Landmark',     name: 'Government',   desc: 'Passports, IDs, tax offices',     color: '#8b5cf6', count: '1,800+ offices' },
-  { icon: 'GraduationCap',name: 'Education',    desc: 'Universities, registrars',        color: '#f59e0b', count: '640+ institutions' },
-  { icon: 'ShoppingBag',  name: 'Retail',       desc: 'Supermarkets, service centers',   color: '#10b981', count: '5,100+ outlets' },
-  { icon: 'Wifi',         name: 'Telecoms',     desc: 'Network providers, service desks',color: '#06b6d4', count: '1,200+ centers' },
+  { icon: 'Cross',        name: 'Healthcare', desc: 'Hospitals, clinics, labs',         color: '#ef4444', count: '2,400+ facilities'  },
+  { icon: 'Building2',    name: 'Banking',    desc: 'Banks, SACCOs, MFIs',              color: '#3b82f6', count: '8,200+ branches'    },
+  { icon: 'Landmark',     name: 'Government', desc: 'Passports, IDs, tax offices',      color: '#8b5cf6', count: '1,800+ offices'     },
+  { icon: 'GraduationCap',name: 'Education',  desc: 'Universities, registrars',         color: '#f59e0b', count: '640+ institutions'  },
+  { icon: 'ShoppingBag',  name: 'Retail',     desc: 'Supermarkets, service centers',    color: '#10b981', count: '5,100+ outlets'     },
+  { icon: 'Wifi',         name: 'Telecoms',   desc: 'Network providers, service desks', color: '#06b6d4', count: '1,200+ centers'     },
 ]
 
-// ─── Institutions with services (for queue joining flow) ───────────────────
 export const serviceInstitutions = [
   {
     id: 'im-bank',
@@ -195,12 +192,12 @@ export const serviceInstitutions = [
     avgWait: 18,
     openHours: '8:00 AM – 4:00 PM',
     services: [
-      { id: 'im-account', name: 'Account Opening',       icon: 'UserPlus',    avgTime: 25, description: 'Open a new current, savings, or fixed deposit account.' },
-      { id: 'im-cash',    name: 'Cash Deposit / Withdrawal', icon: 'Banknote', avgTime: 8,  description: 'Cash transactions at the teller counter.' },
-      { id: 'im-loan',    name: 'Loan Application',      icon: 'TrendingUp',  avgTime: 40, description: 'Personal loans, mortgages, and business financing.' },
-      { id: 'im-forex',   name: 'Foreign Exchange',      icon: 'Globe',       avgTime: 12, description: 'Currency exchange and international transfers.' },
-      { id: 'im-support', name: 'Customer Support',      icon: 'HeadphonesIcon', avgTime: 15, description: 'Dispute resolution, card issues, and account queries.' },
-      { id: 'im-cards',   name: 'Cards & Digital',       icon: 'CreditCard',  avgTime: 10, description: 'Debit/credit card services, mobile banking setup.' },
+      { id: 'im-account', name: 'Account Opening',          icon: 'UserPlus',    avgTime: 25, description: 'Open a new current, savings, or fixed deposit account.' },
+      { id: 'im-cash',    name: 'Cash Deposit / Withdrawal', icon: 'Banknote',    avgTime: 8,  description: 'Cash transactions at the teller counter.' },
+      { id: 'im-loan',    name: 'Loan Application',          icon: 'TrendingUp',  avgTime: 40, description: 'Personal loans, mortgages, and business financing.' },
+      { id: 'im-forex',   name: 'Foreign Exchange',          icon: 'Globe',       avgTime: 12, description: 'Currency exchange and international transfers.' },
+      { id: 'im-support', name: 'Customer Support',          icon: 'Headphones',  avgTime: 15, description: 'Dispute resolution, card issues, and account queries.' },
+      { id: 'im-cards',   name: 'Cards & Digital',           icon: 'CreditCard',  avgTime: 10, description: 'Debit/credit card services, mobile banking setup.' },
     ],
   },
   {
@@ -215,11 +212,11 @@ export const serviceInstitutions = [
     avgWait: 22,
     openHours: '8:30 AM – 4:30 PM',
     services: [
-      { id: 'eq-account', name: 'Account Opening',       icon: 'UserPlus',    avgTime: 20, description: 'New account registration for personal or business.' },
-      { id: 'eq-eazzy',   name: 'Eazzy Banking Support', icon: 'Smartphone',  avgTime: 10, description: 'Mobile banking troubleshooting and activation.' },
-      { id: 'eq-loan',    name: 'Loan Services',         icon: 'TrendingUp',  avgTime: 35, description: 'Equiloan, Eazzy Loan, and business credit.' },
-      { id: 'eq-cash',    name: 'Teller Services',       icon: 'Banknote',    avgTime: 6,  description: 'Deposits, withdrawals, and transfers.' },
-      { id: 'eq-cards',   name: 'Card Services',         icon: 'CreditCard',  avgTime: 12, description: 'New cards, PIN reset, and card complaints.' },
+      { id: 'eq-account', name: 'Account Opening',       icon: 'UserPlus',   avgTime: 20, description: 'New account registration for personal or business.' },
+      { id: 'eq-eazzy',   name: 'Eazzy Banking Support', icon: 'Smartphone', avgTime: 10, description: 'Mobile banking troubleshooting and activation.' },
+      { id: 'eq-loan',    name: 'Loan Services',         icon: 'TrendingUp', avgTime: 35, description: 'Equiloan, Eazzy Loan, and business credit.' },
+      { id: 'eq-cash',    name: 'Teller Services',       icon: 'Banknote',   avgTime: 6,  description: 'Deposits, withdrawals, and transfers.' },
+      { id: 'eq-cards',   name: 'Card Services',         icon: 'CreditCard', avgTime: 12, description: 'New cards, PIN reset, and card complaints.' },
     ],
   },
   {
@@ -234,10 +231,10 @@ export const serviceInstitutions = [
     avgWait: 14,
     openHours: '8:00 AM – 4:00 PM',
     services: [
-      { id: 'kcb-account', name: 'New Account',          icon: 'UserPlus',   avgTime: 20, description: 'Open a KCB savings, current, or junior account.' },
+      { id: 'kcb-account', name: 'New Account',         icon: 'UserPlus',   avgTime: 20, description: 'Open a KCB savings, current, or junior account.' },
       { id: 'kcb-mpesa',   name: 'M-PESA Integration',  icon: 'Smartphone', avgTime: 8,  description: 'KCB M-PESA account and mobile services.' },
-      { id: 'kcb-loan',    name: 'KCB Loans',            icon: 'TrendingUp', avgTime: 30, description: 'Personal, business, or asset finance loans.' },
-      { id: 'kcb-teller',  name: 'Teller / Cash',        icon: 'Banknote',   avgTime: 5,  description: 'Teller counter transactions.' },
+      { id: 'kcb-loan',    name: 'KCB Loans',           icon: 'TrendingUp', avgTime: 30, description: 'Personal, business, or asset finance loans.' },
+      { id: 'kcb-teller',  name: 'Teller / Cash',       icon: 'Banknote',   avgTime: 5,  description: 'Teller counter transactions.' },
     ],
   },
   {
@@ -252,10 +249,10 @@ export const serviceInstitutions = [
     avgWait: 11,
     openHours: '8:00 AM – 4:00 PM',
     services: [
-      { id: 'ab-account',  name: 'Account Opening',       icon: 'UserPlus',   avgTime: 25, description: 'Premium, everyday, or youth accounts.' },
-      { id: 'ab-loan',     name: 'Personal Loans',        icon: 'TrendingUp', avgTime: 40, description: 'Salary advance, personal and vehicle loans.' },
-      { id: 'ab-forex',    name: 'Foreign Exchange',      icon: 'Globe',      avgTime: 10, description: 'Buy/sell currency, international transfers.' },
-      { id: 'ab-support',  name: 'Customer Services',     icon: 'HeadphonesIcon', avgTime: 12, description: 'General inquiries and account management.' },
+      { id: 'ab-account', name: 'Account Opening',  icon: 'UserPlus',   avgTime: 25, description: 'Premium, everyday, or youth accounts.' },
+      { id: 'ab-loan',    name: 'Personal Loans',   icon: 'TrendingUp', avgTime: 40, description: 'Salary advance, personal and vehicle loans.' },
+      { id: 'ab-forex',   name: 'Foreign Exchange', icon: 'Globe',      avgTime: 10, description: 'Buy/sell currency, international transfers.' },
+      { id: 'ab-support', name: 'Customer Services',icon: 'Headphones', avgTime: 12, description: 'General inquiries and account management.' },
     ],
   },
   {
@@ -270,12 +267,12 @@ export const serviceInstitutions = [
     avgWait: 35,
     openHours: '24 hours',
     services: [
-      { id: 'ak-opd',      name: 'Outpatient (OPD)',       icon: 'Stethoscope', avgTime: 20, description: 'General consultation with a physician.' },
-      { id: 'ak-lab',      name: 'Laboratory / Tests',     icon: 'FlaskConical',avgTime: 15, description: 'Blood tests, urinalysis, and diagnostics.' },
-      { id: 'ak-pharmacy', name: 'Pharmacy',               icon: 'Pill',        avgTime: 10, description: 'Prescription collection and OTC medicines.' },
-      { id: 'ak-billing',  name: 'Billing & Insurance',    icon: 'Receipt',     avgTime: 12, description: 'Medical bills, insurance claims, NHIF.' },
-      { id: 'ak-specialist',name:'Specialist Consultation',icon: 'UserCog',     avgTime: 30, description: 'Cardiology, orthopaedics, oncology, and more.' },
-      { id: 'ak-radiology',name: 'Radiology / Imaging',    icon: 'ScanLine',    avgTime: 25, description: 'X-ray, MRI, CT scan, ultrasound.' },
+      { id: 'ak-opd',       name: 'Outpatient (OPD)',        icon: 'Stethoscope',  avgTime: 20, description: 'General consultation with a physician.' },
+      { id: 'ak-lab',       name: 'Laboratory / Tests',      icon: 'FlaskConical', avgTime: 15, description: 'Blood tests, urinalysis, and diagnostics.' },
+      { id: 'ak-pharmacy',  name: 'Pharmacy',                icon: 'Pill',         avgTime: 10, description: 'Prescription collection and OTC medicines.' },
+      { id: 'ak-billing',   name: 'Billing & Insurance',     icon: 'Receipt',      avgTime: 12, description: 'Medical bills, insurance claims, NHIF.' },
+      { id: 'ak-specialist',name: 'Specialist Consultation', icon: 'UserCog',      avgTime: 30, description: 'Cardiology, orthopaedics, oncology, and more.' },
+      { id: 'ak-radiology', name: 'Radiology / Imaging',     icon: 'ScanLine',     avgTime: 25, description: 'X-ray, MRI, CT scan, ultrasound.' },
     ],
   },
   {
@@ -290,11 +287,11 @@ export const serviceInstitutions = [
     avgWait: 55,
     openHours: '24 hours',
     services: [
-      { id: 'knh-opd',     name: 'Outpatient Clinic',     icon: 'Stethoscope', avgTime: 25, description: 'General consultation and assessment.' },
-      { id: 'knh-casualty',name: 'Casualty / Emergency',  icon: 'Siren',       avgTime: 5,  description: 'Urgent care and emergency treatment.' },
-      { id: 'knh-lab',     name: 'Laboratory',            icon: 'FlaskConical',avgTime: 20, description: 'Diagnostic tests and specimen collection.' },
-      { id: 'knh-pharmacy',name: 'Pharmacy',              icon: 'Pill',        avgTime: 15, description: 'Drug dispensing and NHIF services.' },
-      { id: 'knh-nhif',    name: 'NHIF / Billing',        icon: 'Receipt',     avgTime: 18, description: 'NHIF claims, medical billing, and waivers.' },
+      { id: 'knh-opd',      name: 'Outpatient Clinic',    icon: 'Stethoscope',  avgTime: 25, description: 'General consultation and assessment.' },
+      { id: 'knh-casualty', name: 'Casualty / Emergency', icon: 'Siren',        avgTime: 5,  description: 'Urgent care and emergency treatment.' },
+      { id: 'knh-lab',      name: 'Laboratory',           icon: 'FlaskConical', avgTime: 20, description: 'Diagnostic tests and specimen collection.' },
+      { id: 'knh-pharmacy', name: 'Pharmacy',             icon: 'Pill',         avgTime: 15, description: 'Drug dispensing and NHIF services.' },
+      { id: 'knh-nhif',     name: 'NHIF / Billing',       icon: 'Receipt',      avgTime: 18, description: 'NHIF claims, medical billing, and waivers.' },
     ],
   },
   {
@@ -309,11 +306,11 @@ export const serviceInstitutions = [
     avgWait: 42,
     openHours: '8:00 AM – 5:00 PM',
     services: [
-      { id: 'kra-pin',     name: 'PIN Registration / Update', icon: 'Hash',     avgTime: 20, description: 'New KRA PIN or amendment of PIN details.' },
-      { id: 'kra-returns', name: 'Tax Returns Filing',       icon: 'FileText',  avgTime: 30, description: 'File individual, corporate, or VAT returns.' },
-      { id: 'kra-refund',  name: 'Tax Refund Application',   icon: 'RotateCcw', avgTime: 25, description: 'Apply for overpayment refund.' },
-      { id: 'kra-customs', name: 'Customs & Excise',         icon: 'Package',   avgTime: 35, description: 'Import/export declarations and duty payment.' },
-      { id: 'kra-general', name: 'General Enquiries',        icon: 'HelpCircle',avgTime: 15, description: 'Tax education and compliance queries.' },
+      { id: 'kra-pin',     name: 'PIN Registration / Update', icon: 'Hash',       avgTime: 20, description: 'New KRA PIN or amendment of PIN details.' },
+      { id: 'kra-returns', name: 'Tax Returns Filing',        icon: 'FileText',   avgTime: 30, description: 'File individual, corporate, or VAT returns.' },
+      { id: 'kra-refund',  name: 'Tax Refund Application',    icon: 'RotateCcw',  avgTime: 25, description: 'Apply for overpayment refund.' },
+      { id: 'kra-customs', name: 'Customs & Excise',          icon: 'Package',    avgTime: 35, description: 'Import/export declarations and duty payment.' },
+      { id: 'kra-general', name: 'General Enquiries',         icon: 'HelpCircle', avgTime: 15, description: 'Tax education and compliance queries.' },
     ],
   },
   {
@@ -328,13 +325,13 @@ export const serviceInstitutions = [
     avgWait: 38,
     openHours: '8:00 AM – 5:00 PM',
     services: [
-      { id: 'hd-id',       name: 'National ID Card',         icon: 'CreditCard',  avgTime: 20, description: 'New ID application or replacement.' },
-      { id: 'hd-passport',  name: 'Passport Services',       icon: 'Bookmark',    avgTime: 25, description: 'New passport, renewal, or emergency travel doc.' },
-      { id: 'hd-birth',    name: 'Birth Certificate',        icon: 'Baby',        avgTime: 18, description: 'Birth certificate issuance or correction.' },
-      { id: 'hd-driving',  name: 'Driving Licence',          icon: 'Car',         avgTime: 22, description: 'New licence, renewal, or smart card replacement.' },
-      { id: 'hd-ntsa',     name: 'NTSA Services',            icon: 'Car',         avgTime: 30, description: 'Vehicle registration, transfer, and inspection.' },
-      { id: 'hd-nhif',     name: 'NHIF Registration',        icon: 'ShieldCheck', avgTime: 15, description: 'Enroll, update, or get NHIF card.' },
-      { id: 'hd-nssf',     name: 'NSSF Services',            icon: 'ShieldCheck', avgTime: 15, description: 'NSSF registration and contribution records.' },
+      { id: 'hd-id',      name: 'National ID Card',    icon: 'CreditCard',   avgTime: 20, description: 'New ID application or replacement.' },
+      { id: 'hd-passport',name: 'Passport Services',   icon: 'Bookmark',     avgTime: 25, description: 'New passport, renewal, or emergency travel doc.' },
+      { id: 'hd-birth',   name: 'Birth Certificate',   icon: 'Baby',         avgTime: 18, description: 'Birth certificate issuance or correction.' },
+      { id: 'hd-driving', name: 'Driving Licence',     icon: 'Car',          avgTime: 22, description: 'New licence, renewal, or smart card replacement.' },
+      { id: 'hd-ntsa',    name: 'NTSA Services',       icon: 'CarFront',     avgTime: 30, description: 'Vehicle registration, transfer, and inspection.' },
+      { id: 'hd-nhif',    name: 'NHIF Registration',   icon: 'ShieldCheck',  avgTime: 15, description: 'Enroll, update, or get NHIF card.' },
+      { id: 'hd-nssf',    name: 'NSSF Services',       icon: 'ShieldCheck',  avgTime: 15, description: 'NSSF registration and contribution records.' },
     ],
   },
   {

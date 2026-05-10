@@ -19,10 +19,10 @@ export default function Footer() {
               AI-powered queue management built for Africa. Transforming how people wait — one queue at a time.
             </p>
             <div className="flex items-center gap-2 text-slate-500 text-sm mb-2">
-              <MapPin size={13} /> Nairobi · Lagos · Accra · Dakar
+              <MapPin size={13} />KN 4 Ave, Nyarugenge, Kigali
             </div>
             <div className="flex items-center gap-2 text-slate-500 text-sm">
-              <Mail size={13} /> hello@qline.africa
+              <Mail size={13} /> partners@qline.rw
             </div>
           </div>
 
