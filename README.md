@@ -282,7 +282,7 @@ Kenya · Nigeria · Ghana · Rwanda · Senegal · South Africa
 
 ## 📧 Contact
 
-- Demo: hello@qline.africa
+- Demo: sanoangella9@gmail.com
 - Investment: invest@qline.africa
 - Website: qline.africa
 
