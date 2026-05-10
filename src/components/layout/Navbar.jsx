@@ -28,9 +28,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2.5 group">
             <div className="relative">
-              <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/30">
-                <span className="text-white font-black text-sm">Q</span>
-              </div>
+              <img src="/qline-logo.png" alt="QLine Logo" className="w-9 h-9 object-contain" />
               {isDemoMode && (
                 <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full animate-ping" />
               )}

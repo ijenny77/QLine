@@ -11,22 +11,22 @@ import {
 
 // ── Live prediction ticker ────────────────────────────────────────────────────
 const predictionFeed = [
-  { type: 'delay',    user: 'QL-4831', prob: 74, msg: 'User QL-4831 has 74% chance of being late' },
-  { type: 'surge',    user: null,      prob: 91, msg: 'Peak surge predicted in 12 minutes (+47 users)' },
-  { type: 'staff',    user: null,      prob: 88, msg: 'Recommend opening Counter D immediately' },
-  { type: 'reroute',  user: 'QL-4839', prob: 82, msg: 'Rerouting QL-4839 to Counter B for faster service' },
-  { type: 'accuracy', user: null,      prob: 94, msg: 'Wait time prediction accuracy: 94.2% this hour' },
-  { type: 'delay',    user: 'QL-4845', prob: 68, msg: 'User QL-4845 (SMS) — 68% late probability. Notified.' },
-  { type: 'surge',    user: null,      prob: 79, msg: 'Traffic clearing — queue will drop in 8 minutes' },
-  { type: 'staff',    user: null,      prob: 85, msg: 'Counter A efficiency drop 12%. Supervisor alerted.' },
+  { type: 'delay', user: 'QL-4831', prob: 74, msg: 'User QL-4831 has 74% chance of being late' },
+  { type: 'surge', user: null, prob: 91, msg: 'Peak surge predicted in 12 minutes (+47 users)' },
+  { type: 'staff', user: null, prob: 88, msg: 'Recommend opening Counter D immediately' },
+  { type: 'reroute', user: 'QL-4839', prob: 82, msg: 'Rerouting QL-4839 to Counter B for faster service' },
+  { type: 'accuracy', user: null, prob: 94, msg: 'Wait time prediction accuracy: 94.2% this hour' },
+  { type: 'delay', user: 'QL-4845', prob: 68, msg: 'User QL-4845 (SMS) — 68% late probability. Notified.' },
+  { type: 'surge', user: null, prob: 79, msg: 'Traffic clearing — queue will drop in 8 minutes' },
+  { type: 'staff', user: null, prob: 85, msg: 'Counter A efficiency drop 12%. Supervisor alerted.' },
 ]
 
 const typeConfig = {
-  delay:    { color: '#f59e0b', bg: 'bg-yellow-500/10 border-yellow-500/20', badge: 'badge-yellow', icon: Clock },
-  surge:    { color: '#ef4444', bg: 'bg-red-500/10 border-red-500/20',       badge: 'badge-red',    icon: TrendingUp },
-  staff:    { color: '#3b82f6', bg: 'bg-blue-500/10 border-blue-500/20',     badge: 'badge-blue',   icon: Users },
-  reroute:  { color: '#8b5cf6', bg: 'bg-purple-500/10 border-purple-500/20', badge: 'badge-purple', icon: Shuffle },
-  accuracy: { color: '#10b981', bg: 'bg-emerald-500/10 border-emerald-500/20',badge: 'badge-green', icon: CheckCircle },
+  delay: { color: '#f59e0b', bg: 'bg-yellow-500/10 border-yellow-500/20', badge: 'badge-yellow', icon: Clock },
+  surge: { color: '#ef4444', bg: 'bg-red-500/10 border-red-500/20', badge: 'badge-red', icon: TrendingUp },
+  staff: { color: '#3b82f6', bg: 'bg-blue-500/10 border-blue-500/20', badge: 'badge-blue', icon: Users },
+  reroute: { color: '#8b5cf6', bg: 'bg-purple-500/10 border-purple-500/20', badge: 'badge-purple', icon: Shuffle },
+  accuracy: { color: '#10b981', bg: 'bg-emerald-500/10 border-emerald-500/20', badge: 'badge-green', icon: CheckCircle },
 }
 
 
@@ -83,7 +83,7 @@ function ConfidenceMeter({ value, label, color }) {
 
 function ModelCard({ name, type, accuracy, status, trained, params }) {
   return (
-    <div className="glass p-5 rounded hover:bg-white/8 transition-all">
+    <div className="glass p-5 rounded-2xl hover:bg-white/8 transition-all">
       <div className="flex items-start justify-between mb-4">
         <div className="p-2.5 rounded-xl bg-purple-500/10">
           <Brain size={18} className="text-purple-400" />
@@ -105,7 +105,7 @@ function ModelCard({ name, type, accuracy, status, trained, params }) {
             initial={{ width: 0 }}
             animate={{ width: `${accuracy}%` }}
             transition={{ duration: 1.5, ease: 'easeOut' }}
-            className="h-full bg-blue-500 rounded-full"
+            className="h-full bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"
           />
         </div>
         <div className="flex justify-between text-[10px] text-slate-600 pt-1">
@@ -119,10 +119,10 @@ function ModelCard({ name, type, accuracy, status, trained, params }) {
 
 export default function AIEngine() {
   const [feedItems, setFeedItems] = useState(predictionFeed.slice(0, 3))
-  const [feedIdx, setFeedIdx]     = useState(3)
+  const [feedIdx, setFeedIdx] = useState(3)
   const [isRunning, setIsRunning] = useState(true)
 
-  const waitData       = useRealtimeData(18, 8)
+  const waitData = useRealtimeData(18, 8)
   const efficiencyData = useRealtimeData(87, 5, 2000)
   const congestionData = useRealtimeData(42, 15, 1800)
 
@@ -169,11 +169,11 @@ export default function AIEngine() {
         {/* Confidence meters */}
         <div className="grid md:grid-cols-3 gap-5 mb-8">
           {[
-            { label: 'Wait Time Prediction',  value: 94, color: '#3b82f6' },
-            { label: 'Delay Detection',        value: 91, color: '#8b5cf6' },
-            { label: 'Peak Traffic Forecast',  value: 86, color: '#06b6d4' },
+            { label: 'Wait Time Prediction', value: 94, color: '#3b82f6' },
+            { label: 'Delay Detection', value: 91, color: '#8b5cf6' },
+            { label: 'Peak Traffic Forecast', value: 86, color: '#06b6d4' },
           ].map(m => (
-            <div key={m.label} className="glass p-5 rounded">
+            <div key={m.label} className="glass p-5 rounded-2xl">
               <ConfidenceMeter {...m} />
             </div>
           ))}
@@ -185,7 +185,7 @@ export default function AIEngine() {
           {/* Real-time charts */}
           <div className="lg:col-span-2 space-y-5">
 
-            <div className="glass p-5 rounded">
+            <div className="glass p-5 rounded-2xl">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <Clock size={15} className="text-blue-400" />
@@ -199,7 +199,7 @@ export default function AIEngine() {
                 <AreaChart data={waitData}>
                   <defs>
                     <linearGradient id="wt" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%"  stopColor="#3b82f6" stopOpacity={0.3} />
+                      <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
                       <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
                     </linearGradient>
                   </defs>
@@ -211,7 +211,7 @@ export default function AIEngine() {
             </div>
 
             <div className="grid grid-cols-2 gap-5">
-              <div className="glass p-5 rounded">
+              <div className="glass p-5 rounded-2xl">
                 <div className="flex items-center gap-2 mb-3">
                   <Zap size={14} className="text-emerald-400" />
                   <span className="font-semibold text-white text-sm">Efficiency Score</span>
@@ -224,7 +224,7 @@ export default function AIEngine() {
                   </LineChart>
                 </ResponsiveContainer>
               </div>
-              <div className="glass p-5 rounded">
+              <div className="glass p-5 rounded-2xl">
                 <div className="flex items-center gap-2 mb-3">
                   <AlertTriangle size={14} className="text-yellow-400" />
                   <span className="font-semibold text-white text-sm">Congestion Index</span>
@@ -233,7 +233,7 @@ export default function AIEngine() {
                   <AreaChart data={congestionData}>
                     <defs>
                       <linearGradient id="cong" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%"  stopColor="#f59e0b" stopOpacity={0.3} />
+                        <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.3} />
                         <stop offset="95%" stopColor="#f59e0b" stopOpacity={0} />
                       </linearGradient>
                     </defs>
@@ -246,7 +246,7 @@ export default function AIEngine() {
             </div>
           </div>
 
-          <div className="glass p-5 rounded">
+          <div className="glass p-5 rounded-2xl">
             <div className="flex items-center gap-2 mb-4">
               <div className="relative">
                 <Brain size={16} className="text-purple-400" />
@@ -288,15 +288,15 @@ export default function AIEngine() {
           <h2 className="font-display font-bold text-xl text-white mb-5">Deployed ML Models</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { name: 'WaitPredict v3.2',    type: 'LSTM Time Series',        accuracy: 94, status: 'production', trained: '2.1M events', params: '4.2M params' },
-              { name: 'DelayDetect v2.8',    type: 'Random Forest Classifier',accuracy: 91, status: 'production', trained: '890K events', params: '1.8M params' },
-              { name: 'SurgeForcast v1.5',   type: 'XGBoost Regression',      accuracy: 86, status: 'production', trained: '3.4M events', params: '2.1M params' },
-              { name: 'StaffOptim v2.1',     type: 'Reinforcement Learning',  accuracy: 88, status: 'staging',    trained: '650K events', params: '8.4M params' },
+              { name: 'WaitPredict v3.2', type: 'LSTM Time Series', accuracy: 94, status: 'production', trained: '2.1M events', params: '4.2M params' },
+              { name: 'DelayDetect v2.8', type: 'Random Forest Classifier', accuracy: 91, status: 'production', trained: '890K events', params: '1.8M params' },
+              { name: 'SurgeForcast v1.5', type: 'XGBoost Regression', accuracy: 86, status: 'production', trained: '3.4M events', params: '2.1M params' },
+              { name: 'StaffOptim v2.1', type: 'Reinforcement Learning', accuracy: 88, status: 'staging', trained: '650K events', params: '8.4M params' },
             ].map(m => <ModelCard key={m.name} {...m} />)}
           </div>
         </div>
 
-        <div className="glass p-8 rounded">
+        <div className="glass p-8 rounded-2xl">
           <h2 className="font-display font-bold text-xl text-white mb-6">AI Architecture</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[

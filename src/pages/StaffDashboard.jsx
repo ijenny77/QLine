@@ -40,8 +40,8 @@ function StatCard({ icon: Icon, label, value, sub, color, trend }) {
 function AIInsightCard({ insight }) {
   const colors = {
     warning: { bg: 'bg-yellow-500/10', border: 'border-yellow-500/30', text: 'text-yellow-400', badge: 'badge-yellow' },
-    info:    { bg: 'bg-blue-500/10',   border: 'border-blue-500/30',   text: 'text-blue-400',   badge: 'badge-blue' },
-    success: { bg: 'bg-emerald-500/10',border: 'border-emerald-500/30',text: 'text-emerald-400',badge: 'badge-green' },
+    info: { bg: 'bg-blue-500/10', border: 'border-blue-500/30', text: 'text-blue-400', badge: 'badge-blue' },
+    success: { bg: 'bg-emerald-500/10', border: 'border-emerald-500/30', text: 'text-emerald-400', badge: 'badge-green' },
   }
   const c = colors[insight.type] || colors.info
 
@@ -69,11 +69,11 @@ function AIInsightCard({ insight }) {
 
 function QueueRow({ user, onReposition }) {
   const channelColors = {
-    app:    { color: '#3b82f6', label: 'App' },
-    sms:    { color: '#8b5cf6', label: 'SMS' },
-    ussd:   { color: '#06b6d4', label: 'USSD' },
+    app: { color: '#3b82f6', label: 'App' },
+    sms: { color: '#8b5cf6', label: 'SMS' },
+    ussd: { color: '#06b6d4', label: 'USSD' },
     walkin: { color: '#10b981', label: 'Walk-in' },
-    qr:     { color: '#f59e0b', label: 'QR' },
+    qr: { color: '#f59e0b', label: 'QR' },
   }
   const ch = channelColors[user.channel] || channelColors.app
 
@@ -86,12 +86,12 @@ function QueueRow({ user, onReposition }) {
       className={`flex items-center gap-4 p-4 rounded-xl transition-all
         ${user.status === 'serving' ? 'bg-emerald-500/10 border border-emerald-500/20' :
           user.status === 'delayed' ? 'bg-yellow-500/10 border border-yellow-500/20' :
-          'bg-white/3 hover:bg-white/6 border border-transparent'}`}
+            'bg-white/3 hover:bg-white/6 border border-transparent'}`}
     >
       <div className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold shrink-0
         ${user.status === 'serving' ? 'bg-emerald-500 text-white' :
           user.status === 'delayed' ? 'bg-yellow-500 text-dark-900' :
-          'bg-white/10 text-slate-300'}`}>
+            'bg-white/10 text-slate-300'}`}>
         {user.position}
       </div>
 
@@ -113,7 +113,7 @@ function QueueRow({ user, onReposition }) {
       {user.status === 'delayed' && (
         <button
           onClick={() => onReposition(user.id)}
-          className="flex items-center gap-1 px-3 py-1.5 rounded bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-xs font-medium hover:bg-yellow-500/20 transition-all"
+          className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-xs font-medium hover:bg-yellow-500/20 transition-all"
         >
           <Shuffle size={12} /> Reposition
         </button>
@@ -124,9 +124,9 @@ function QueueRow({ user, onReposition }) {
 
 function CounterCard({ counter }) {
   const statusConfig = {
-    active: { color: '#10b981', label: 'Active',  bg: 'bg-emerald-500/10 border-emerald-500/30' },
-    idle:   { color: '#f59e0b', label: 'Idle',    bg: 'bg-yellow-500/10 border-yellow-500/30' },
-    closed: { color: '#6b7280', label: 'Closed',  bg: 'bg-white/5 border-white/10' },
+    active: { color: '#10b981', label: 'Active', bg: 'bg-emerald-500/10 border-emerald-500/30' },
+    idle: { color: '#f59e0b', label: 'Idle', bg: 'bg-yellow-500/10 border-yellow-500/30' },
+    closed: { color: '#6b7280', label: 'Closed', bg: 'bg-white/5 border-white/10' },
   }
   const cfg = statusConfig[counter.status]
 
@@ -195,7 +195,7 @@ export default function StaffDashboard() {
             <h1 className="font-display font-black text-2xl lg:text-3xl text-white">Staff Dashboard</h1>
             <p className="text-slate-500 text-sm mt-1">
               Equity Bank — Nairobi HQ &nbsp;·&nbsp;
-              <span className="text-slate-400">Today, {new Date().toLocaleDateString('en-KE', { weekday:'long', month:'long', day:'numeric' })}</span>
+              <span className="text-slate-400">Today, {new Date().toLocaleDateString('en-KE', { weekday: 'long', month: 'long', day: 'numeric' })}</span>
             </p>
           </div>
 
@@ -232,7 +232,7 @@ export default function StaffDashboard() {
               exit={{ opacity: 0, height: 0 }}
               className="overflow-hidden mb-6"
             >
-              <div className="glass p-5 rounded flex items-center gap-4">
+              <div className="glass p-5 rounded-2xl flex items-center gap-4">
                 <UserPlus size={18} className="text-blue-400 shrink-0" />
                 <input
                   type="text"
@@ -255,10 +255,10 @@ export default function StaffDashboard() {
         </AnimatePresence>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <StatCard icon={Users}     label="Total Today"     value={totalToday}      color="#3b82f6" trend={12}  />
-          <StatCard icon={Clock}     label="Avg Wait Time"   value={`${avgWaitTime}m`} sub="per user" color="#8b5cf6" trend={-8} />
-          <StatCard icon={TrendingUp} label="Queue Size"     value={waiting.length}  color="#06b6d4" />
-          <StatCard icon={Zap}       label="AI Efficiency"   value={`${aiEfficiency}%`} color="#10b981" trend={3} />
+          <StatCard icon={Users} label="Total Today" value={totalToday} color="#3b82f6" trend={12} />
+          <StatCard icon={Clock} label="Avg Wait Time" value={`${avgWaitTime}m`} sub="per user" color="#8b5cf6" trend={-8} />
+          <StatCard icon={TrendingUp} label="Queue Size" value={waiting.length} color="#06b6d4" />
+          <StatCard icon={Zap} label="AI Efficiency" value={`${aiEfficiency}%`} color="#10b981" trend={3} />
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">
@@ -270,12 +270,12 @@ export default function StaffDashboard() {
                 key={serving.id}
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="glass border border-emerald-500/30 bg-emerald-500/5 p-5 rounded"
+                className="glass border border-emerald-500/30 bg-emerald-500/5 p-5 rounded-2xl"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className="relative">
-                      <div className="w-14 h-14 rounded bg-emerald-500/20 flex items-center justify-center">
+                      <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 flex items-center justify-center">
                         <Monitor size={24} className="text-emerald-400" />
                       </div>
                       <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full animate-ping" />
@@ -296,13 +296,13 @@ export default function StaffDashboard() {
 
             <div className="flex items-center gap-2">
               {[
-                { id: 'queue',    label: 'Live Queue',   count: waiting.length },
-                { id: 'counters', label: 'Counters',     count: activeCounters.length },
+                { id: 'queue', label: 'Live Queue', count: waiting.length },
+                { id: 'counters', label: 'Counters', count: activeCounters.length },
               ].map(t => (
                 <button
                   key={t.id}
                   onClick={() => setTab(t.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded text-sm font-medium transition-all
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all
                     ${tab === t.id ? 'bg-white/10 text-white' : 'text-slate-400 hover:text-white'}`}
                 >
                   {t.label}
@@ -318,7 +318,7 @@ export default function StaffDashboard() {
             </div>
 
             {tab === 'queue' && (
-              <div className="glass rounded overflow-hidden">
+              <div className="glass rounded-2xl overflow-hidden">
                 <div className="p-4 border-b border-white/5 flex items-center justify-between">
                   <span className="font-semibold text-white text-sm">Waiting Queue</span>
                   <div className="flex items-center gap-1.5">
@@ -350,7 +350,7 @@ export default function StaffDashboard() {
               </div>
             )}
 
-            <div className="glass p-5 rounded">
+            <div className="glass p-5 rounded-2xl">
               <div className="flex items-center justify-between mb-4">
                 <span className="font-semibold text-white text-sm">Today's Queue Flow</span>
                 <span className="badge badge-blue text-[10px]">Live</span>
@@ -359,7 +359,7 @@ export default function StaffDashboard() {
                 <AreaChart data={waitTimeData} margin={{ top: 5, right: 5, bottom: 0, left: -20 }}>
                   <defs>
                     <linearGradient id="after" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%"  stopColor="#3b82f6" stopOpacity={0.3} />
+                      <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
                       <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
                     </linearGradient>
                   </defs>
@@ -378,9 +378,9 @@ export default function StaffDashboard() {
 
           <div className="space-y-6">
 
-            <div className="glass p-5 rounded">
+            <div className="glass p-5 rounded-2xl">
               <div className="flex items-center gap-2 mb-4">
-                <div className="p-1.5 rounded bg-purple-500/20">
+                <div className="p-1.5 rounded-lg bg-purple-500/20">
                   <Brain size={16} className="text-purple-400" />
                 </div>
                 <span className="font-semibold text-white text-sm">AI Insights</span>
@@ -397,7 +397,7 @@ export default function StaffDashboard() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="glass border border-red-500/30 bg-red-500/5 p-5 rounded"
+                className="glass border border-red-500/30 bg-red-500/5 p-5 rounded-2xl"
               >
                 <div className="flex items-center gap-2 mb-3">
                   <WifiOff size={16} className="text-red-400" />
@@ -413,14 +413,14 @@ export default function StaffDashboard() {
               </motion.div>
             )}
 
-            <div className="glass p-5 rounded space-y-4">
+            <div className="glass p-5 rounded-2xl space-y-4">
               <span className="font-semibold text-white text-sm">Quick Stats</span>
               {[
-                { label: 'Served today',    value: totalToday - waiting.length, color: '#10b981' },
-                { label: 'Delayed users',   value: delayed.length,              color: '#f59e0b' },
+                { label: 'Served today', value: totalToday - waiting.length, color: '#10b981' },
+                { label: 'Delayed users', value: delayed.length, color: '#f59e0b' },
                 { label: 'Active counters', value: activeCounters.filter(c => c.status === 'active').length, color: '#3b82f6' },
-                { label: 'SMS users',       value: queue.filter(u => u.channel === 'sms').length,  color: '#8b5cf6' },
-                { label: 'USSD users',      value: queue.filter(u => u.channel === 'ussd').length, color: '#06b6d4' },
+                { label: 'SMS users', value: queue.filter(u => u.channel === 'sms').length, color: '#8b5cf6' },
+                { label: 'USSD users', value: queue.filter(u => u.channel === 'ussd').length, color: '#06b6d4' },
               ].map(({ label, value, color }) => (
                 <div key={label} className="flex items-center justify-between">
                   <span className="text-slate-400 text-sm">{label}</span>

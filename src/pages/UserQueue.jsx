@@ -569,9 +569,7 @@ function SMSSimulator() {
           </div>
         </div>
         <div className="flex items-center gap-3 p-3 bg-slate-800 rounded mb-3">
-          <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center">
-            <span className="text-white font-bold text-xs">Q</span>
-          </div>
+          <img src="/qline-logo.png" alt="QLine AI" className="w-9 h-9 rounded-full object-contain bg-slate-900" />
           <div>
             <p className="text-white text-sm font-semibold">QLine</p>
             <p className="text-green-400 text-xs">● Active</p>
@@ -676,8 +674,7 @@ function QRMock({ institution }) {
           <rect x="7"  y="77" width="16" height="16" fill="#000" rx="1"/>
           <rect x="35" y="35" width="30" height="30" fill="#000" rx="2"/>
           <rect x="38" y="38" width="24" height="24" fill="#fff" rx="1"/>
-          <rect x="41" y="41" width="18" height="18" fill="#1d4ed8" rx="2"/>
-          <text x="50" y="55" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Q</text>
+          <image href="/qline-logo.png" x="41" y="41" width="18" height="18" />
         </svg>
       </div>
       <div className="text-center">

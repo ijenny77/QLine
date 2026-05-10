@@ -10,9 +10,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center">
-                <span className="text-white font-black text-sm">Q</span>
-              </div>
+              <img src="/qline-logo.png" alt="QLine Logo" className="w-9 h-9 object-contain" />
               <span className="font-display font-black text-xl gradient-text">QLine</span>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed mb-6">

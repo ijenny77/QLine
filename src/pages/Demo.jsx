@@ -73,7 +73,7 @@ function VisualProblem() {
             transition={{ delay: i * 0.05 }}
             className="w-10 h-10 rounded-full bg-red-500/20 border border-red-500/30 flex items-center justify-center text-lg"
           >
-            <Clock size={20} className="text-red-400" />
+            😤
           </motion.div>
         ))}
       </div>
@@ -90,10 +90,10 @@ function VisualProblem() {
 
 function VisualJoin() {
   const channels = [
-    { icon: Smartphone,    name: 'Amara — App',    delay: 0 },
-    { icon: MessageSquare, name: 'Kwame — SMS',     delay: 0.6 },
-    { icon: Hash,          name: 'Fatima — USSD',  delay: 1.2 },
-    { icon: QrCode,        name: 'Emmanuel — QR',  delay: 1.8 },
+    { icon: Smartphone, name: 'Amara — App', delay: 0 },
+    { icon: MessageSquare, name: 'Kwame — SMS', delay: 0.6 },
+    { icon: Hash, name: 'Fatima — USSD', delay: 1.2 },
+    { icon: QrCode, name: 'Emmanuel — QR', delay: 1.8 },
   ]
   return (
     <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
@@ -103,7 +103,7 @@ function VisualJoin() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay, type: 'spring', stiffness: 200 }}
-          className="glass p-4 rounded text-center border border-blue-500/20"
+          className="glass p-4 rounded-2xl text-center border border-blue-500/20"
         >
           <Icon size={24} className="text-blue-400 mx-auto mb-2" />
           <p className="text-slate-300 text-xs">{name}</p>
@@ -163,14 +163,14 @@ function VisualReposition() {
 
   return (
     <div className="max-w-xs mx-auto">
-      <div className="glass p-5 rounded space-y-2">
+      <div className="glass p-5 rounded-2xl space-y-2">
         {[
-          { pos: 5, name: 'Aisha M.',      status: 'waiting' },
+          { pos: 5, name: 'Aisha M.', status: 'waiting' },
           { pos: step < 1 ? 6 : 9, name: 'Emmanuel B.', status: step >= 1 ? 'repositioned' : 'waiting', highlight: true },
-          { pos: step < 1 ? 7 : 6, name: 'Seun A.',     status: 'waiting' },
-          { pos: step < 1 ? 8 : 7, name: 'Nadia T.',    status: 'waiting' },
-          { pos: step < 1 ? 9 : 8, name: 'Zainab T.',   status: 'waiting' },
-        ].sort((a,b) => a.pos - b.pos).map(u => (
+          { pos: step < 1 ? 7 : 6, name: 'Seun A.', status: 'waiting' },
+          { pos: step < 1 ? 8 : 7, name: 'Nadia T.', status: 'waiting' },
+          { pos: step < 1 ? 9 : 8, name: 'Zainab T.', status: 'waiting' },
+        ].sort((a, b) => a.pos - b.pos).map(u => (
           <motion.div
             key={u.name}
             layout
@@ -200,10 +200,10 @@ function VisualReposition() {
 
 function VisualOffline() {
   const [offline, setOffline] = useState(false)
-  const [synced, setSynced]   = useState(0)
+  const [synced, setSynced] = useState(0)
 
   useEffect(() => {
-    const t1 = setTimeout(() => setOffline(true),  1000)
+    const t1 = setTimeout(() => setOffline(true), 1000)
     const t2 = setInterval(() => setSynced(s => s < 12 ? s + 1 : s), 400)
     const t3 = setTimeout(() => setOffline(false), 3500)
     return () => { clearTimeout(t1); clearInterval(t2); clearTimeout(t3) }
@@ -213,12 +213,12 @@ function VisualOffline() {
     <div className="max-w-xs mx-auto text-center">
       <motion.div
         animate={{ scale: offline ? 1.05 : 1 }}
-        className={`glass p-8 rounded border mb-4 transition-all duration-500
+        className={`glass p-8 rounded-2xl border mb-4 transition-all duration-500
           ${offline ? 'border-red-500/40 bg-red-500/5' : 'border-emerald-500/40 bg-emerald-500/5'}`}
       >
         {offline
           ? <WifiOff size={48} className="text-red-400 mx-auto mb-3" />
-          : <Wifi    size={48} className="text-emerald-400 mx-auto mb-3" />}
+          : <Wifi size={48} className="text-emerald-400 mx-auto mb-3" />}
         <div className={`font-bold text-2xl mb-1 ${offline ? 'text-red-400' : 'text-emerald-400'}`}>
           {offline ? 'Offline' : 'Online'}
         </div>
@@ -240,10 +240,10 @@ function VisualOffline() {
 
 function VisualResult() {
   const metrics = [
-    { value: '50%', label: 'Wait Time Reduced', color: '#10b981', icon: <Clock size={28} color="#10b981" /> },
-    { value: '40%', label: 'Efficiency Gained',  color: '#3b82f6', icon: <TrendingUp size={28} color="#3b82f6" /> },
-    { value: '0',   label: 'Frustration Dropouts', color: '#8b5cf6', icon: <CheckCircle size={28} color="#8b5cf6" /> },
-    { value: '4.9/5', label: 'User Satisfaction',  color: '#f59e0b', icon: <Star size={28} color="#f59e0b" /> },
+    { value: '50%', label: 'Wait Time Reduced', color: '#10b981', icon: '⏱️' },
+    { value: '40%', label: 'Efficiency Gained', color: '#3b82f6', icon: '⚡' },
+    { value: '0', label: 'Frustration Dropouts', color: '#8b5cf6', icon: '😊' },
+    { value: '4.9★', label: 'User Satisfaction', color: '#f59e0b', icon: '⭐' },
   ]
   return (
     <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto">
@@ -253,7 +253,7 @@ function VisualResult() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: i * 0.2, type: 'spring' }}
-          className="glass p-4 rounded text-center"
+          className="glass p-4 rounded-2xl text-center"
         >
           <div className="text-3xl mb-2">{m.icon}</div>
           <div className="font-display font-black text-2xl mb-1" style={{ color: m.color }}>{m.value}</div>
@@ -265,23 +265,23 @@ function VisualResult() {
 }
 
 const VisualComponents = {
-  problem:    VisualProblem,
-  join:       VisualJoin,
-  ai:         VisualAI,
+  problem: VisualProblem,
+  join: VisualJoin,
+  ai: VisualAI,
   reposition: VisualReposition,
-  offline:    VisualOffline,
-  result:     VisualResult,
+  offline: VisualOffline,
+  result: VisualResult,
 }
 
 // ── MAIN DEMO PAGE ─────────────────────────────────────────────────────────────
 export default function Demo() {
-  const [running, setRunning]   = useState(false)
+  const [running, setRunning] = useState(false)
   const [storyIdx, setStoryIdx] = useState(0)
-  const [elapsed, setElapsed]   = useState(0)
-  const timerRef                = useRef(null)
-  const elapsedRef              = useRef(null)
-  const startDemo               = useQueueStore(s => s.startDemo)
-  const stopDemo                = useQueueStore(s => s.stopDemo)
+  const [elapsed, setElapsed] = useState(0)
+  const timerRef = useRef(null)
+  const elapsedRef = useRef(null)
+  const startDemo = useQueueStore(s => s.startDemo)
+  const stopDemo = useQueueStore(s => s.stopDemo)
 
   const current = STORY[storyIdx]
   const VisualComponent = VisualComponents[current.visual]
@@ -339,11 +339,11 @@ export default function Demo() {
           </p>
         </div>
 
-        <div className="glass border border-white/10 rounded overflow-hidden mb-8">
+        <div className="glass border border-white/10 rounded-3xl overflow-hidden mb-8">
 
           <div className="h-1 bg-white/5">
             <motion.div
-              className="h-full bg-blue-500"
+              className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
               style={{ width: `${progress}%` }}
               transition={{ duration: 0.05 }}
             />
@@ -354,7 +354,7 @@ export default function Demo() {
               <button
                 key={s.id}
                 onClick={() => { if (running) { setStoryIdx(i); setElapsed(0) } }}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded text-xs font-medium whitespace-nowrap transition-all
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all
                   ${i === storyIdx ? 'bg-blue-600/30 text-blue-400 border border-blue-500/30' :
                     i < storyIdx ? 'text-slate-400' : 'text-slate-600'}`}
               >
@@ -422,15 +422,15 @@ export default function Demo() {
 
         <div className="grid md:grid-cols-3 gap-5 mb-10">
           {[
-            { icon: Users,    title: 'Live Queue Simulation', desc: 'Watch users join from app, SMS, USSD, and QR code in real time.',        link: '/queue',     cta: 'Try Queue' },
-            { icon: BarChart3, title: 'Staff Dashboard',       desc: 'Explore the full management dashboard with AI alerts and counters.',        link: '/dashboard', cta: 'Open Dashboard' },
-            { icon: Brain,    title: 'Analytics & AI',         desc: 'Deep dive into wait time charts, AI accuracy metrics, and heatmaps.',       link: '/analytics', cta: 'See Analytics' },
+            { icon: Users, title: 'Live Queue Simulation', desc: 'Watch users join from app, SMS, USSD, and QR code in real time.', link: '/queue', cta: 'Try Queue' },
+            { icon: BarChart3, title: 'Staff Dashboard', desc: 'Explore the full management dashboard with AI alerts and counters.', link: '/dashboard', cta: 'Open Dashboard' },
+            { icon: Brain, title: 'Analytics & AI', desc: 'Deep dive into wait time charts, AI accuracy metrics, and heatmaps.', link: '/analytics', cta: 'See Analytics' },
           ].map(card => (
             <motion.div
               key={card.title}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="glass p-6 rounded hover:bg-white/8 transition-all group"
+              className="glass p-6 rounded-2xl hover:bg-white/8 transition-all group"
             >
               <div className="p-2.5 rounded-xl bg-blue-500/10 w-fit mb-4">
                 <card.icon size={20} className="text-blue-400" />
@@ -444,7 +444,7 @@ export default function Demo() {
           ))}
         </div>
 
-        <div className="glass border border-purple-500/30 bg-purple-500/5 p-8 rounded text-center">
+        <div className="glass border border-purple-500/30 bg-purple-500/5 p-8 rounded-3xl text-center">
           <Star size={32} className="text-yellow-400 mx-auto mb-4" />
           <h2 className="font-display font-black text-3xl text-white mb-3">
             Interested in QLine?
