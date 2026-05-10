@@ -23,8 +23,8 @@ export default function Navbar() {
   const toggleOffline= useQueueStore(s => s.toggleOffline)
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 border-b border-white/5">
-      <div className="glass-dark rounded-none border-x-0 border-t-0 px-4 md:px-8">
+    <header className="fixed top-0 left-0 right-0 z-40 transition-colors duration-300" style={{ background: 'var(--bg-surface)', borderBottom: '1px solid var(--glass-border)' }}>
+      <div className="px-4 md:px-8">
         <div className="max-w-7xl mx-auto flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2.5 group">
             <div className="relative">
@@ -109,7 +109,8 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-dark border-t border-white/5 overflow-hidden"
+            className="md:hidden overflow-hidden"
+            style={{ background: 'var(--bg-surface)', borderTop: '1px solid var(--glass-border)' }}
           >
             <div className="px-4 py-3 flex flex-col gap-1">
               {navLinks.map(link => (

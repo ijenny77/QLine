@@ -17,7 +17,7 @@ function ChartCard({ title, badge, children, className = '' }) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`glass p-6 rounded-2xl ${className}`}
+      className={`glass p-6 rounded ${className}`}
     >
       <div className="flex items-center justify-between mb-5">
         <h3 className="font-semibold text-white text-sm">{title}</h3>
@@ -173,7 +173,7 @@ export default function Analytics() {
               <button
                 key={p}
                 onClick={() => setPeriod(p)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-all
+                className={`px-3 py-1.5 rounded text-xs font-medium capitalize transition-all
                   ${period === p ? 'bg-blue-600/30 text-blue-400 border border-blue-500/40' : 'text-slate-400 hover:text-white'}`}
               >
                 {p}
@@ -192,7 +192,7 @@ export default function Analytics() {
             { label: 'Efficiency Score',value: '87%',    delta: '+5%',  color: '#8b5cf6' },
             { label: 'AI Predictions',  value: '12,841', delta: '+41%', color: '#06b6d4' },
           ].map(kpi => (
-            <div key={kpi.label} className="glass p-5 rounded-2xl">
+            <div key={kpi.label} className="glass p-5 rounded">
               <div className="text-slate-500 text-xs mb-2">{kpi.label}</div>
               <div className="font-display font-black text-3xl text-white mb-1">{kpi.value}</div>
               <div className={`text-xs font-semibold ${kpi.delta.startsWith('+') ? 'text-emerald-400' : 'text-red-400'}`}>

@@ -103,7 +103,7 @@ function VisualJoin() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay, type: 'spring', stiffness: 200 }}
-          className="glass p-4 rounded-2xl text-center border border-blue-500/20"
+          className="glass p-4 rounded text-center border border-blue-500/20"
         >
           <Icon size={24} className="text-blue-400 mx-auto mb-2" />
           <p className="text-slate-300 text-xs">{name}</p>
@@ -163,7 +163,7 @@ function VisualReposition() {
 
   return (
     <div className="max-w-xs mx-auto">
-      <div className="glass p-5 rounded-2xl space-y-2">
+      <div className="glass p-5 rounded space-y-2">
         {[
           { pos: 5, name: 'Aisha M.',      status: 'waiting' },
           { pos: step < 1 ? 6 : 9, name: 'Emmanuel B.', status: step >= 1 ? 'repositioned' : 'waiting', highlight: true },
@@ -213,7 +213,7 @@ function VisualOffline() {
     <div className="max-w-xs mx-auto text-center">
       <motion.div
         animate={{ scale: offline ? 1.05 : 1 }}
-        className={`glass p-8 rounded-2xl border mb-4 transition-all duration-500
+        className={`glass p-8 rounded border mb-4 transition-all duration-500
           ${offline ? 'border-red-500/40 bg-red-500/5' : 'border-emerald-500/40 bg-emerald-500/5'}`}
       >
         {offline
@@ -253,7 +253,7 @@ function VisualResult() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: i * 0.2, type: 'spring' }}
-          className="glass p-4 rounded-2xl text-center"
+          className="glass p-4 rounded text-center"
         >
           <div className="text-3xl mb-2">{m.icon}</div>
           <div className="font-display font-black text-2xl mb-1" style={{ color: m.color }}>{m.value}</div>
@@ -339,7 +339,7 @@ export default function Demo() {
           </p>
         </div>
 
-        <div className="glass border border-white/10 rounded-3xl overflow-hidden mb-8">
+        <div className="glass border border-white/10 rounded overflow-hidden mb-8">
 
           <div className="h-1 bg-white/5">
             <motion.div
@@ -354,7 +354,7 @@ export default function Demo() {
               <button
                 key={s.id}
                 onClick={() => { if (running) { setStoryIdx(i); setElapsed(0) } }}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all
+                className={`flex items-center gap-2 px-3 py-1.5 rounded text-xs font-medium whitespace-nowrap transition-all
                   ${i === storyIdx ? 'bg-blue-600/30 text-blue-400 border border-blue-500/30' :
                     i < storyIdx ? 'text-slate-400' : 'text-slate-600'}`}
               >
@@ -430,7 +430,7 @@ export default function Demo() {
               key={card.title}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="glass p-6 rounded-2xl hover:bg-white/8 transition-all group"
+              className="glass p-6 rounded hover:bg-white/8 transition-all group"
             >
               <div className="p-2.5 rounded-xl bg-blue-500/10 w-fit mb-4">
                 <card.icon size={20} className="text-blue-400" />
@@ -444,7 +444,7 @@ export default function Demo() {
           ))}
         </div>
 
-        <div className="glass border border-purple-500/30 bg-purple-500/5 p-8 rounded-3xl text-center">
+        <div className="glass border border-purple-500/30 bg-purple-500/5 p-8 rounded text-center">
           <Star size={32} className="text-yellow-400 mx-auto mb-4" />
           <h2 className="font-display font-black text-3xl text-white mb-3">
             Interested in QLine?

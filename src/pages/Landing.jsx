@@ -41,12 +41,12 @@ function Section({ children, className = '' }) {
 function DashboardPreview() {
   return (
     <div className="relative max-w-2xl mx-auto">
-      <div className="absolute inset-0 bg-blue-500/10 blur-3xl rounded-3xl" />
+      <div className="absolute inset-0 bg-blue-500/10 blur-3xl rounded" />
 
       <motion.div
         animate={{ y: [0, -10, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-        className="relative glass border border-white/15 rounded-3xl p-6 shadow-2xl"
+        className="relative glass border border-white/15 rounded p-6 shadow-2xl"
       >
         <div className="flex items-center justify-between mb-6">
           <div>
@@ -118,7 +118,7 @@ function DashboardPreview() {
         transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
         className="absolute -top-6 -left-8 hidden lg:block"
       >
-        <div className="glass border border-emerald-500/30 rounded-2xl px-4 py-3 shadow-xl">
+        <div className="glass border border-emerald-500/30 rounded px-4 py-3 shadow-xl">
           <div className="text-emerald-400 text-xs font-semibold mb-1">Wait Reduced</div>
           <div className="text-white font-display font-bold text-2xl">-50%</div>
         </div>
@@ -129,7 +129,7 @@ function DashboardPreview() {
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
         className="absolute -bottom-6 -right-8 hidden lg:block"
       >
-        <div className="glass border border-cyan-500/30 rounded-2xl px-4 py-3 shadow-xl">
+        <div className="glass border border-cyan-500/30 rounded px-4 py-3 shadow-xl">
           <div className="text-cyan-400 text-xs font-semibold mb-1">Users Served</div>
           <div className="text-white font-display font-bold text-2xl">2.4M+</div>
         </div>
@@ -293,7 +293,7 @@ function Solution() {
 
           {steps.map((step, i) => (
             <motion.div key={i} variants={fadeUp} className="relative text-center">
-              <div className="inline-flex w-20 h-20 items-center justify-center mb-5 glass rounded-2xl relative">
+              <div className="inline-flex w-20 h-20 items-center justify-center mb-5 glass rounded relative">
                 <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-blue-600 text-white text-[10px] font-bold flex items-center justify-center">
                   {i + 1}
                 </span>
@@ -373,7 +373,7 @@ function MarketSectors() {
                 className="glass p-5 text-center hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 cursor-pointer group"
               >
                 <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-all"
+                  className="w-12 h-12 rounded flex items-center justify-center mx-auto mb-4 transition-all"
                   style={{ backgroundColor: `${sector.color}20`, color: sector.color }}
                 >
                   <Icon size={22} />
@@ -529,7 +529,7 @@ function CTA() {
   return (
     <Section className="py-24 px-6">
       <div className="max-w-4xl mx-auto text-center">
-        <motion.div variants={fadeUp} className="relative glass p-12 rounded-3xl overflow-hidden">
+        <motion.div variants={fadeUp} className="relative glass p-12 rounded overflow-hidden">
           <div className="absolute inset-0 bg-blue-600/5" />
           <div className="absolute -top-20 -right-20 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl" />
           <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />

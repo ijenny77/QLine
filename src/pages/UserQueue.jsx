@@ -102,7 +102,7 @@ function StepInstitution({ onSelect }) {
               onClick={() => onSelect(inst)}
               onMouseEnter={() => setHighlighted(inst.id)}
               onMouseLeave={() => setHighlighted(null)}
-              className="glass text-left p-5 rounded-2xl transition-all duration-200 group w-full"
+              className="glass text-left p-5 rounded transition-all duration-200 group w-full"
               style={highlighted === inst.id ? { borderColor: inst.color + '60', background: inst.color + '08' } : {}}
             >
 
@@ -174,7 +174,7 @@ function StepService({ institution, onSelect, onBack }) {
       transition={{ duration: 0.3 }}
     >
       {/* Institution header */}
-      <div className="glass p-4 rounded-2xl mb-6 flex items-center gap-4">
+      <div className="glass p-4 rounded mb-6 flex items-center gap-4">
         <div
           className="w-12 h-12 rounded-xl flex items-center justify-center font-display font-black text-sm text-white shrink-0"
           style={{ background: `linear-gradient(135deg, ${institution.color}, ${institution.color}bb)` }}
@@ -223,7 +223,7 @@ function StepService({ institution, onSelect, onBack }) {
             >
               <div className="flex items-start gap-3">
                 <div
-                  className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
+                  className="w-9 h-9 rounded flex items-center justify-center shrink-0 mt-0.5"
                   style={{ background: institution.color + '15', color: institution.color }}
                 >
                   <Icon size={16} />
@@ -282,7 +282,7 @@ function StepDetails({ institution, service, onJoined, onBack }) {
       transition={{ duration: 0.3 }}
       className="max-w-md mx-auto"
     >
-      <div className="glass p-4 rounded-2xl mb-6">
+      <div className="glass p-4 rounded mb-6">
         <div className="flex items-center gap-3">
           <div
             className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xs text-white shrink-0"
@@ -309,7 +309,7 @@ function StepDetails({ institution, service, onJoined, onBack }) {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="glass p-6 rounded-2xl space-y-5">
+      <form onSubmit={handleSubmit} className="glass p-6 rounded space-y-5">
         <div>
           <h3 className="font-display font-bold text-xl mb-1" style={{ color: 'var(--text-primary)' }}>Your Details</h3>
           <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>We'll send your ticket and updates to your phone.</p>
@@ -377,19 +377,19 @@ function StepTicket({ ticket, position, onReset }) {
     >
       {/* Ticket card */}
       <div
-        className="glass rounded-3xl overflow-hidden shadow-xl"
+        className="glass rounded overflow-hidden shadow-sm"
         style={{ borderColor: (ticket.institution?.color || '#3b82f6') + '40' }}
       >
         <div
           className="h-2"
-          style={{ background: `linear-gradient(to right, ${ticket.institution?.color || '#3b82f6'}, #7c3aed, #06b6d4)` }}
+          style={{ background: 'var(--color-accent)' }}
         />
 
         <div className="p-7">
           <div className="flex items-start justify-between mb-6">
             <div className="flex items-center gap-3">
               <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xs text-white shrink-0"
+                className="w-10 h-10 rounded flex items-center justify-center font-bold text-xs text-white shrink-0"
                 style={{ background: ticket.institution?.color || '#3b82f6' }}
               >
                 {ticket.institution?.shortName || 'QL'}
@@ -428,7 +428,7 @@ function StepTicket({ ticket, position, onReset }) {
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 1.5, ease: 'easeOut' }}
                 className="h-full rounded-full"
-                style={{ background: `linear-gradient(to right, ${ticket.institution?.color || '#3b82f6'}, #7c3aed)` }}
+                style={{ background: 'var(--color-accent)' }}
               />
             </div>
           </div>
@@ -439,7 +439,7 @@ function StepTicket({ ticket, position, onReset }) {
               { label: 'Service',     value: ticket.service?.avgTime ? `${ticket.service.avgTime}m` : '—' },
               { label: 'Channel',     value: ticket.channel === 'walkin' ? 'Walk-in' : ticket.channel.toUpperCase() },
             ].map(s => (
-              <div key={s.label} className="glass p-2.5 rounded-xl text-center">
+              <div key={s.label} className="glass p-2.5 rounded text-center">
                 <div className="text-[10px] mb-1" style={{ color: 'var(--text-muted)' }}>{s.label}</div>
                 <div className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>{s.value}</div>
               </div>
@@ -449,14 +449,14 @@ function StepTicket({ ticket, position, onReset }) {
           <div className="grid grid-cols-2 gap-3">
             <button
               onClick={() => setShowNotif(true)}
-              className="flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold transition-all border"
+              className="flex items-center justify-center gap-2 py-3 rounded text-sm font-semibold transition-all border"
               style={{ background: 'var(--glass-bg)', borderColor: 'var(--glass-border)', color: 'var(--text-secondary)' }}
             >
               <Clock size={14} /> Need More Time
             </button>
             <button
-              className="flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold text-white transition-all"
-              style={{ background: `linear-gradient(135deg, #059669, #0d9488)` }}
+              className="flex items-center justify-center gap-2 py-3 rounded text-sm font-semibold text-white transition-all"
+              style={{ background: 'var(--color-accent)' }}
             >
               <Navigation size={14} /> I'm Arriving
             </button>
@@ -547,7 +547,7 @@ function SMSSimulator() {
             <div className="w-3 h-3 ml-1 border border-slate-400 rounded-sm" />
           </div>
         </div>
-        <div className="flex items-center gap-3 p-3 bg-slate-800 rounded-2xl mb-3">
+        <div className="flex items-center gap-3 p-3 bg-slate-800 rounded mb-3">
           <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center">
             <span className="text-white font-bold text-xs">Q</span>
           </div>
@@ -562,7 +562,7 @@ function SMSSimulator() {
               <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                 className={`flex ${msg.from === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                <div className={`max-w-[80%] px-3 py-2 rounded-2xl text-xs leading-relaxed whitespace-pre-line
+                <div className={`max-w-[80%] px-3 py-2 rounded text-xs leading-relaxed whitespace-pre-line
                   ${msg.from === 'user' ? 'bg-blue-600 text-white rounded-br-sm' : 'bg-slate-700 text-slate-200 rounded-bl-sm'}`}>
                   {msg.text}
                   <div className={`text-[10px] mt-1 ${msg.from === 'user' ? 'text-blue-200' : 'text-slate-500'}`}>{msg.time}</div>
@@ -571,7 +571,7 @@ function SMSSimulator() {
             ))}
           </AnimatePresence>
         </div>
-        <div className="flex items-center gap-2 mt-3 p-2 bg-slate-800 rounded-2xl">
+        <div className="flex items-center gap-2 mt-3 p-2 bg-slate-800 rounded">
           <input type="text" placeholder="Type a message…" className="flex-1 bg-transparent text-slate-300 text-xs outline-none px-2 placeholder-slate-600" readOnly />
           <button onClick={restart} className="p-1.5 bg-blue-600 rounded-full" title="Restart">
             <RotateCcw size={12} className="text-white" />
@@ -604,9 +604,9 @@ function USSDSimulator() {
 
   return (
     <div className="max-w-xs mx-auto">
-      <div className="bg-slate-900 rounded-3xl border-2 border-slate-700 p-4 shadow-2xl">
+      <div className="bg-slate-900 rounded border-2 border-slate-700 p-4 shadow-2xl">
         <div className="bg-slate-800 rounded-xl p-1 mb-3">
-          <div className="bg-green-950 rounded-lg p-4 min-h-36 font-mono text-green-400 text-xs">
+          <div className="bg-green-950 rounded p-4 min-h-36 font-mono text-green-400 text-xs">
             <div className="text-green-300 font-bold mb-2">{currentScreen.title}</div>
             {currentScreen.options ? (
               currentScreen.options.map((opt, i) => (
@@ -623,7 +623,7 @@ function USSDSimulator() {
         <div className="grid grid-cols-3 gap-2">
           {['1','2','3','4','5','6','7','8','9','*','0','#'].map(k => (
             <button key={k} onClick={() => handleOption(k)}
-              className="py-2.5 rounded-lg bg-slate-700 text-slate-200 text-sm font-bold hover:bg-slate-600 active:bg-slate-500 transition-colors">
+              className="py-2.5 rounded bg-slate-700 text-slate-200 text-sm font-bold hover:bg-slate-600 active:bg-slate-500 transition-colors">
               {k}
             </button>
           ))}
@@ -641,7 +641,7 @@ function USSDSimulator() {
 // ─────────────────────────────────────────────────────────────────────────────
 function QRMock({ institution }) {
   return (
-    <div className="flex flex-col items-center gap-4 p-6 glass rounded-2xl w-fit mx-auto">
+    <div className="flex flex-col items-center gap-4 p-6 glass rounded w-fit mx-auto">
       <div className="w-48 h-48 bg-white rounded-xl p-3 flex items-center justify-center">
         <svg viewBox="0 0 100 100" className="w-full h-full">
           <rect x="0"  y="0"  width="30" height="30" fill="#000" rx="2"/>
@@ -785,7 +785,7 @@ export default function UserQueue() {
               exit={{ opacity: 0, height: 0 }}
               className="overflow-hidden mb-10"
             >
-              <div className="glass p-6 rounded-2xl">
+              <div className="glass p-6 rounded">
                 {demoTab === 'sms'  && <SMSSimulator />}
                 {demoTab === 'ussd' && <USSDSimulator />}
                 {demoTab === 'qr'   && <QRMock institution={institution} />}
@@ -795,7 +795,7 @@ export default function UserQueue() {
         </AnimatePresence>
 
         {/* Step flow */}
-        <div className="glass p-6 md:p-8 rounded-3xl">
+        <div className="glass p-6 md:p-8 rounded">
           {/* Step bar — only show for main flow (steps 0–3) */}
           {step < 3 || ticket ? <StepBar current={step} /> : null}
 
@@ -824,7 +824,7 @@ export default function UserQueue() {
 
         {/* Live queue strip */}
         {queue.length > 0 && (
-          <div className="mt-10 glass p-5 rounded-2xl">
+          <div className="mt-10 glass p-5 rounded">
             <h3 className="font-bold text-sm mb-4 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
               <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
               Live Queue Preview
