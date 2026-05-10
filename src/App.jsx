@@ -47,7 +47,7 @@ function AppRoutes() {
             className="fixed top-16 left-0 right-0 z-30 flex items-center justify-center"
           >
             <div className="mt-2 px-5 py-2 bg-red-900/90 backdrop-blur-sm border border-red-500/40 rounded-full text-red-300 text-sm font-medium shadow-xl">
-              ⚠️ Offline Mode — Queue running locally. Data will sync on reconnect.
+              Offline Mode — Queue running locally. Data will sync on reconnect.
             </div>
           </motion.div>
         )}

@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import {
   Play, Square, Zap, Users, Clock, TrendingUp, Brain, CheckCircle,
-  MessageSquare, Smartphone, Hash, QrCode, WifiOff, Wifi,
-  ChevronRight, ArrowRight, Star, Globe, BarChart3, AlertTriangle
+  ChevronRight, ArrowRight, Star, Globe, BarChart3, AlertTriangle, UserX,
+  Timer, Smile
 } from 'lucide-react'
 import { useQueueStore } from '../store/queueStore'
 
@@ -73,7 +73,7 @@ function VisualProblem() {
             transition={{ delay: i * 0.05 }}
             className="w-10 h-10 rounded-full bg-red-500/20 border border-red-500/30 flex items-center justify-center text-lg"
           >
-            😤
+            <UserX size={18} className="text-red-400" />
           </motion.div>
         ))}
       </div>
@@ -240,10 +240,10 @@ function VisualOffline() {
 
 function VisualResult() {
   const metrics = [
-    { value: '50%', label: 'Wait Time Reduced', color: '#10b981', icon: '⏱️' },
-    { value: '40%', label: 'Efficiency Gained', color: '#3b82f6', icon: '⚡' },
-    { value: '0', label: 'Frustration Dropouts', color: '#8b5cf6', icon: '😊' },
-    { value: '4.9★', label: 'User Satisfaction', color: '#f59e0b', icon: '⭐' },
+    { value: '50%', label: 'Wait Time Reduced', color: '#10b981', icon: <Timer size={28} style={{color: '#10b981'}} /> },
+    { value: '40%', label: 'Efficiency Gained', color: '#3b82f6', icon: <Zap size={28} style={{color: '#3b82f6'}} /> },
+    { value: '0', label: 'Frustration Dropouts', color: '#8b5cf6', icon: <Smile size={28} style={{color: '#8b5cf6'}} /> },
+    { value: '4.9★', label: 'User Satisfaction', color: '#f59e0b', icon: <Star size={28} style={{color: '#f59e0b'}} /> },
   ]
   return (
     <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto">
@@ -255,7 +255,7 @@ function VisualResult() {
           transition={{ delay: i * 0.2, type: 'spring' }}
           className="glass p-4 rounded-2xl text-center"
         >
-          <div className="text-3xl mb-2">{m.icon}</div>
+          <div className="flex justify-center mb-2">{m.icon}</div>
           <div className="font-display font-black text-2xl mb-1" style={{ color: m.color }}>{m.value}</div>
           <div className="text-slate-500 text-xs">{m.label}</div>
         </motion.div>
