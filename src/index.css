@@ -93,10 +93,7 @@
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-primary);
   }
 
   .btn-primary {
@@ -104,7 +101,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    background: var(--color-primary);
     color: #fff;
     font-weight: 600;
     border-radius: 0.75rem;
@@ -238,10 +235,7 @@
   .queue-number {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 900;
-    background: linear-gradient(135deg, #60a5fa, #a78bfa, #34d399);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-primary);
   }
 }
 
