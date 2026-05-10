@@ -83,7 +83,7 @@ function ConfidenceMeter({ value, label, color }) {
 
 function ModelCard({ name, type, accuracy, status, trained, params }) {
   return (
-    <div className="glass p-5 rounded-2xl hover:bg-white/8 transition-all">
+    <div className="glass p-5 rounded hover:bg-white/8 transition-all">
       <div className="flex items-start justify-between mb-4">
         <div className="p-2.5 rounded-xl bg-purple-500/10">
           <Brain size={18} className="text-purple-400" />
@@ -173,7 +173,7 @@ export default function AIEngine() {
             { label: 'Delay Detection', value: 91, color: '#8b5cf6' },
             { label: 'Peak Traffic Forecast', value: 86, color: '#06b6d4' },
           ].map(m => (
-            <div key={m.label} className="glass p-5 rounded-2xl">
+            <div key={m.label} className="glass p-5 rounded">
               <ConfidenceMeter {...m} />
             </div>
           ))}
@@ -185,7 +185,7 @@ export default function AIEngine() {
           {/* Real-time charts */}
           <div className="lg:col-span-2 space-y-5">
 
-            <div className="glass p-5 rounded-2xl">
+            <div className="glass p-5 rounded">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <Clock size={15} className="text-blue-400" />
@@ -211,7 +211,7 @@ export default function AIEngine() {
             </div>
 
             <div className="grid grid-cols-2 gap-5">
-              <div className="glass p-5 rounded-2xl">
+              <div className="glass p-5 rounded">
                 <div className="flex items-center gap-2 mb-3">
                   <Zap size={14} className="text-emerald-400" />
                   <span className="font-semibold text-white text-sm">Efficiency Score</span>
@@ -224,7 +224,7 @@ export default function AIEngine() {
                   </LineChart>
                 </ResponsiveContainer>
               </div>
-              <div className="glass p-5 rounded-2xl">
+              <div className="glass p-5 rounded">
                 <div className="flex items-center gap-2 mb-3">
                   <AlertTriangle size={14} className="text-yellow-400" />
                   <span className="font-semibold text-white text-sm">Congestion Index</span>
@@ -246,7 +246,7 @@ export default function AIEngine() {
             </div>
           </div>
 
-          <div className="glass p-5 rounded-2xl">
+          <div className="glass p-5 rounded">
             <div className="flex items-center gap-2 mb-4">
               <div className="relative">
                 <Brain size={16} className="text-purple-400" />
@@ -296,7 +296,7 @@ export default function AIEngine() {
           </div>
         </div>
 
-        <div className="glass p-8 rounded-2xl">
+        <div className="glass p-8 rounded">
           <h2 className="font-display font-bold text-xl text-white mb-6">AI Architecture</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
