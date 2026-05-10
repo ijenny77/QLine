@@ -548,7 +548,7 @@ function SMSSimulator() {
           </div>
         </div>
         <div className="flex items-center gap-3 p-3 bg-slate-800 rounded-2xl mb-3">
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+          <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center">
             <span className="text-white font-bold text-xs">Q</span>
           </div>
           <div>
@@ -688,7 +688,7 @@ function StepBar({ current }) {
                 className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all"
                 style={
                   done   ? { background: '#10b981', color: '#fff' } :
-                  active ? { background: 'linear-gradient(135deg,#2563eb,#7c3aed)', color: '#fff' } :
+                  active ? { background: '#2563eb', color: '#fff' } :
                            { background: 'var(--glass-bg)', border: '1px solid var(--glass-border)', color: 'var(--text-muted)' }
                 }
               >

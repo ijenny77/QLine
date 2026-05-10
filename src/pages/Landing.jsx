@@ -337,7 +337,7 @@ function Features() {
               className="glass p-5 hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 group"
             >
               <div className="flex items-start justify-between mb-4">
-                <div className="p-2.5 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 group-hover:from-blue-500/30 group-hover:to-purple-500/30 transition-all">
+                <div className="p-2.5 rounded-xl bg-blue-500/20 group-hover:bg-blue-500/30 transition-all">
                   <f.icon size={20} className="text-blue-400" />
                 </div>
                 <span className="badge badge-blue text-[10px]">{f.badge}</span>
@@ -448,7 +448,7 @@ function Testimonials() {
               {/* Footer */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center font-bold text-sm text-white shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center font-bold text-sm text-white shrink-0">
                     {t.avatar}
                   </div>
                   <div>
