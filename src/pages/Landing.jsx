@@ -41,7 +41,7 @@ function Section({ children, className = '' }) {
 function DashboardPreview() {
   return (
     <div className="relative max-w-2xl mx-auto">
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-cyan-500/20 blur-3xl rounded-3xl" />
+      <div className="absolute inset-0 bg-blue-500/10 blur-3xl rounded-3xl" />
 
       <motion.div
         animate={{ y: [0, -10, 0] }}
@@ -289,7 +289,7 @@ function Solution() {
         </motion.div>
 
         <div className="relative grid md:grid-cols-4 gap-8">
-          <div className="absolute top-10 left-[12%] right-[12%] h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent hidden md:block" />
+          <div className="absolute top-10 left-[12%] right-[12%] h-px bg-blue-500/20 hidden md:block" />
 
           {steps.map((step, i) => (
             <motion.div key={i} variants={fadeUp} className="relative text-center">
@@ -356,7 +356,7 @@ function MarketSectors() {
   const sectorIcons = { Cross, Building2, Landmark, GraduationCap, ShoppingBag, Wifi }
 
   return (
-    <Section className="py-24 px-6 bg-gradient-to-b from-transparent via-purple-950/10 to-transparent">
+    <Section className="py-24 px-6 bg-blue-900/5">
       <div className="max-w-6xl mx-auto">
         <motion.div variants={fadeUp} className="text-center mb-16">
           <div className="section-label">Market Sectors</div>
@@ -427,7 +427,7 @@ function Impact() {
 
 function Testimonials() {
   return (
-    <Section className="py-24 px-6 bg-gradient-to-b from-transparent via-blue-950/10 to-transparent">
+    <Section className="py-24 px-6 bg-blue-900/5">
       <div className="max-w-6xl mx-auto">
         <motion.div variants={fadeUp} className="text-center mb-16">
           <div className="section-label">Testimonials</div>
@@ -530,7 +530,7 @@ function CTA() {
     <Section className="py-24 px-6">
       <div className="max-w-4xl mx-auto text-center">
         <motion.div variants={fadeUp} className="relative glass p-12 rounded-3xl overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-cyan-600/10" />
+          <div className="absolute inset-0 bg-blue-600/5" />
           <div className="absolute -top-20 -right-20 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl" />
           <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
 
