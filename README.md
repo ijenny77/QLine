@@ -288,4 +288,4 @@ Kenya · Nigeria · Ghana · Rwanda · Senegal · South Africa
 
 ---
 
-*Built with ❤️ for Africa — QLine Technologies Ltd, 2025*
+*Built with patriotis for Africa — QLine Technologies Ltd, 2025*
