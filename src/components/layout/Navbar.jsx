@@ -1,152 +1,266 @@
-import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Sun, Moon, Wifi, WifiOff, Zap } from 'lucide-react'
+import { useState, useRef, useEffect } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import {
+  ChevronDown, Wifi, WifiOff, RotateCcw,
+  Users, Layers, Clock, Activity, ShieldCheck,
+  UserCheck, Building2, Menu, X
+} from 'lucide-react'
 import { useQueueStore } from '../../store/queueStore'
-import clsx from 'clsx'
-
-const navLinks = [
-  { label: 'Home',      to: '/' },
-  { label: 'My Queue',  to: '/queue' },
-  { label: 'Dashboard', to: '/dashboard' },
-  { label: 'Analytics', to: '/analytics' },
-  { label: 'AI Engine', to: '/ai' },
-]
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
-  const isDarkMode   = useQueueStore(s => s.isDarkMode)
-  const isOffline    = useQueueStore(s => s.isOffline)
-  const isDemoMode   = useQueueStore(s => s.isDemoMode)
-  const toggleDark   = useQueueStore(s => s.toggleDarkMode)
-  const toggleOffline= useQueueStore(s => s.toggleOffline)
+  const navigate = useNavigate()
+  const [operationsOpen, setOperationsOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const dropdownRef = useRef(null)
+
+  const isOffline = useQueueStore(s => s.isOffline)
+  const pendingOfflineChanges = useQueueStore(s => s.pendingOfflineChanges)
+  const toggleOffline = useQueueStore(s => s.toggleOffline)
+  const resetDemo = useQueueStore(s => s.resetDemo)
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOperationsOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  const isOperationsActive = ['/dashboard', '/services', '/history'].some(p => pathname.startsWith(p))
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 transition-colors duration-300" style={{ background: 'var(--bg-surface)', borderBottom: '1px solid var(--glass-border)' }}>
-      <div className="px-4 md:px-8">
-        <div className="max-w-7xl mx-auto flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <div className="relative">
-              <img src="/qline-logo.png" alt="QLine Logo" className="w-9 h-9 object-contain" />
-              {isDemoMode && (
-                <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full animate-ping" />
-              )}
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className="font-display font-black text-lg gradient-text">QLine</span>
-              <span className="text-[10px] text-slate-500 font-medium tracking-widest uppercase">AI Queue</span>
-            </div>
-          </Link>
+    <header className="sticky top-0 z-40 bg-white border-b border-[#DDE3E2]">
+      {/* Top institution & environment bar */}
+      <div className="bg-[#132A32] text-white text-xs px-4 md:px-8 py-1.5 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Building2 size={13} className="text-[#0A6A6C] text-emerald-400" />
+          <span className="font-semibold text-slate-100">Kigali Hospital — Demo</span>
+          <span className="text-[10px] tracking-wider uppercase bg-[#1E3C47] text-[#A2C2C6] px-1.5 py-0.5 rounded font-mono">
+            DEMO ENVIRONMENT
+          </span>
+        </div>
+        <div className="flex items-center gap-4 text-slate-300">
+          <span className="hidden sm:inline text-[11px] text-slate-400">
+            Rwanda Public Service Queue Platform
+          </span>
+          <button
+            onClick={resetDemo}
+            title="Reset queue and state to clean scenario for judges"
+            className="flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-medium bg-[#1E3C47] hover:bg-[#0A6A6C] text-white transition-colors"
+          >
+            <RotateCcw size={11} />
+            <span>RESET DEMO</span>
+          </button>
+        </div>
+      </div>
 
-          <nav className="hidden md:flex items-center gap-1">
-            {navLinks.map(link => (
-              <Link
-                key={link.to}
-                to={link.to}
-                style={
-                  pathname === link.to
-                    ? { color: 'var(--text-primary)', background: 'var(--glass-border)' }
-                    : { color: 'var(--text-secondary)' }
-                }
-                className="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:opacity-80"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-2">
-            {/* Offline toggle */}
-            <button
-              onClick={toggleOffline}
-              title={isOffline ? 'Go online' : 'Simulate offline'}
-              className={clsx(
-                'hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all duration-200',
-                isOffline
-                  ? 'border-red-500/40 bg-red-500/10 text-red-500'
-                  : 'border-slate-300/30 dark:border-white/10 bg-white/5'
-              )}
-            >
-              {isOffline ? <WifiOff size={13} /> : <Wifi size={13} />}
-              {isOffline ? 'Offline' : 'Online'}
-            </button>
-
-            {/* Dark mode */}
-            <button
-              onClick={toggleDark}
-              style={{ color: 'var(--text-secondary)' }}
-              className="p-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition-all"
-            >
-              {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-
-            <Link
-              to="/demo"
-              className="hidden md:flex items-center gap-1.5 px-4 py-2 bg-blue-600 rounded-lg text-sm font-semibold text-white hover:opacity-90 transition-all shadow-lg shadow-blue-500/20"
-            >
-              <Zap size={14} />
-              Live Demo
+      {/* Main navigation row */}
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
+        <div className="flex items-center justify-between h-14">
+          
+          {/* Logo & Brand */}
+          <div className="flex items-center gap-6">
+            <Link to="/" className="flex items-center gap-2.5">
+              <img src="/qline-logo.png" alt="QLine" className="w-8 h-8 object-contain" />
+              <div className="flex flex-col leading-none">
+                <span className="font-semibold text-lg tracking-tight text-[#132A32]">QLine</span>
+                <span className="text-[9px] text-[#66757A] font-medium uppercase tracking-wider">Queue System</span>
+              </div>
             </Link>
 
-            {/* Mobile menu toggle */}
+            {/* Desktop Navigation Links */}
+            <nav className="hidden md:flex items-center gap-1 ml-4 text-sm font-medium">
+              {/* Operations Dropdown */}
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={() => setOperationsOpen(!operationsOpen)}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded transition-colors ${
+                    isOperationsActive
+                      ? 'text-[#0A6A6C] bg-[#E6F1F1] font-semibold'
+                      : 'text-[#172126] hover:bg-[#F6F7F5]'
+                  }`}
+                >
+                  <span>Operations</span>
+                  <ChevronDown size={14} className={`transition-transform ${operationsOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                {operationsOpen && (
+                  <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-[#DDE3E2] rounded shadow-dropdown py-1 z-50">
+                    <Link
+                      to="/dashboard"
+                      onClick={() => setOperationsOpen(false)}
+                      className="flex items-center gap-2.5 px-3.5 py-2 text-xs text-[#172126] hover:bg-[#F6F7F5]"
+                    >
+                      <Users size={14} className="text-[#0A6A6C]" />
+                      <div>
+                        <div className="font-medium">Live Queue</div>
+                        <div className="text-[10px] text-[#66757A]">Staff queue window</div>
+                      </div>
+                    </Link>
+                    <Link
+                      to="/services"
+                      onClick={() => setOperationsOpen(false)}
+                      className="flex items-center gap-2.5 px-3.5 py-2 text-xs text-[#172126] hover:bg-[#F6F7F5]"
+                    >
+                      <Layers size={14} className="text-[#0A6A6C]" />
+                      <div>
+                        <div className="font-medium">Services</div>
+                        <div className="text-[10px] text-[#66757A]">Hospital counters</div>
+                      </div>
+                    </Link>
+                    <Link
+                      to="/history"
+                      onClick={() => setOperationsOpen(false)}
+                      className="flex items-center gap-2.5 px-3.5 py-2 text-xs text-[#172126] hover:bg-[#F6F7F5]"
+                    >
+                      <Clock size={14} className="text-[#0A6A6C]" />
+                      <div>
+                        <div className="font-medium">History</div>
+                        <div className="text-[10px] text-[#66757A]">Served tickets log</div>
+                      </div>
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* Insights */}
+              <Link
+                to="/analytics"
+                className={`px-3 py-1.5 rounded transition-colors ${
+                  pathname === '/analytics'
+                    ? 'text-[#0A6A6C] bg-[#E6F1F1] font-semibold'
+                    : 'text-[#172126] hover:bg-[#F6F7F5]'
+                }`}
+              >
+                Insights
+              </Link>
+
+              {/* System */}
+              <Link
+                to="/connectivity"
+                className={`px-3 py-1.5 rounded transition-colors ${
+                  pathname === '/connectivity'
+                    ? 'text-[#0A6A6C] bg-[#E6F1F1] font-semibold'
+                    : 'text-[#172126] hover:bg-[#F6F7F5]'
+                }`}
+              >
+                System
+              </Link>
+            </nav>
+          </div>
+
+          {/* Right Action Tools */}
+          <div className="flex items-center gap-2.5">
+            {/* Quick Experience Switcher: Citizen vs Staff */}
+            <div className="hidden sm:flex items-center bg-[#F6F7F5] border border-[#DDE3E2] rounded p-0.5 text-xs font-medium">
+              <Link
+                to="/queue"
+                className={`px-2.5 py-1 rounded transition-colors ${
+                  pathname === '/queue'
+                    ? 'bg-[#0A6A6C] text-white shadow-subtle font-semibold'
+                    : 'text-[#66757A] hover:text-[#172126]'
+                }`}
+              >
+                Citizen Mode
+              </Link>
+              <Link
+                to="/dashboard"
+                className={`px-2.5 py-1 rounded transition-colors ${
+                  pathname === '/dashboard'
+                    ? 'bg-[#132A32] text-white shadow-subtle font-semibold'
+                    : 'text-[#66757A] hover:text-[#172126]'
+                }`}
+              >
+                Staff Mode
+              </Link>
+            </div>
+
+            {/* Connectivity Simulation Pill */}
             <button
-              onClick={() => setOpen(!open)}
-              className="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-all"
+              onClick={toggleOffline}
+              title={isOffline ? 'Click to restore online connectivity' : 'Click to simulate internet outage'}
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-semibold border transition-all ${
+                isOffline
+                  ? 'bg-[#FDEEEE] border-[#F5C6C6] text-[#B83A3A] animate-pulse'
+                  : 'bg-[#E8F5F1] border-[#B6E3D4] text-[#167A5B]'
+              }`}
             >
-              {open ? <X size={20} /> : <Menu size={20} />}
+              {isOffline ? (
+                <>
+                  <WifiOff size={13} />
+                  <span>OFFLINE {pendingOfflineChanges > 0 ? `(${pendingOfflineChanges})` : ''}</span>
+                </>
+              ) : (
+                <>
+                  <Wifi size={13} />
+                  <span>ONLINE</span>
+                </>
+              )}
+            </button>
+
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-1.5 text-[#172126] hover:bg-[#F6F7F5] rounded"
+            >
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden overflow-hidden"
-            style={{ background: 'var(--bg-surface)', borderTop: '1px solid var(--glass-border)' }}
+      {/* Mobile Drawer */}
+      {mobileMenuOpen && (
+        <div className="md:hidden border-t border-[#DDE3E2] bg-white px-4 py-3 space-y-2">
+          <div className="text-xs font-semibold text-[#66757A] uppercase tracking-wider mb-1">Navigation</div>
+          <Link
+            to="/queue"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block px-3 py-2 rounded text-sm font-medium text-[#172126] hover:bg-[#F6F7F5]"
           >
-            <div className="px-4 py-3 flex flex-col gap-1">
-              {navLinks.map(link => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  onClick={() => setOpen(false)}
-                  style={
-                    pathname === link.to
-                      ? { color: 'var(--text-primary)', background: 'var(--glass-border)' }
-                      : { color: 'var(--text-secondary)' }
-                  }
-                  className="px-4 py-3 rounded-lg text-sm font-medium transition-all hover:opacity-80"
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <Link
-                to="/demo"
-                onClick={() => setOpen(false)}
-                className="flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-semibold text-white bg-blue-600 mt-2"
-              >
-                <Zap size={14} /> Live Demo
-              </Link>
-              <button
-                onClick={toggleOffline}
-                className={clsx(
-                  'flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-all',
-                  isOffline ? 'text-red-400' : 'text-slate-400'
-                )}
-              >
-                {isOffline ? <WifiOff size={14} /> : <Wifi size={14} />}
-                {isOffline ? 'Offline Mode On' : 'Simulate Offline'}
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            Citizen Experience (Join & Track)
+          </Link>
+          <Link
+            to="/dashboard"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block px-3 py-2 rounded text-sm font-medium text-[#172126] hover:bg-[#F6F7F5]"
+          >
+            Staff Operations (Live Queue)
+          </Link>
+          <Link
+            to="/services"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block px-3 py-2 rounded text-sm font-medium text-[#172126] hover:bg-[#F6F7F5]"
+          >
+            Hospital Service Windows
+          </Link>
+          <Link
+            to="/history"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block px-3 py-2 rounded text-sm font-medium text-[#172126] hover:bg-[#F6F7F5]"
+          >
+            Served Tickets History
+          </Link>
+          <Link
+            to="/analytics"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block px-3 py-2 rounded text-sm font-medium text-[#172126] hover:bg-[#F6F7F5]"
+          >
+            Operational Overview
+          </Link>
+          <Link
+            to="/connectivity"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block px-3 py-2 rounded text-sm font-medium text-[#172126] hover:bg-[#F6F7F5]"
+          >
+            System Connectivity & Sync
+          </Link>
+        </div>
+      )}
     </header>
   )
 }

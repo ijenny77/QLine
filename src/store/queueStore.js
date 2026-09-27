@@ -1,176 +1,535 @@
 import { create } from 'zustand'
+import { INITIAL_LAB_QUEUE, INITIAL_SERVED_HISTORY } from '../data/mockData'
 
-const estimateWait = (position, avgServiceTime = 4) =>
-  Math.round(position * avgServiceTime * (0.8 + Math.random() * 0.4))
-
-const generateTicketId = () =>
-  `QL-${String(Math.floor(Math.random() * 9000) + 1000)}`
-
-const INITIAL_QUEUE = [
-  { id: 1,  ticketId: 'QL-4821', name: 'Amara Diallo',     position: 1,  status: 'serving',  channel: 'app',    waitTime: 0,  eta: '9:02 AM' },
-  { id: 2,  ticketId: 'QL-4822', name: 'Kwame Asante',     position: 2,  status: 'waiting',  channel: 'sms',    waitTime: 4,  eta: '9:06 AM' },
-  { id: 3,  ticketId: 'QL-4823', name: 'Fatima Al-Hassan', position: 3,  status: 'waiting',  channel: 'ussd',   waitTime: 8,  eta: '9:10 AM' },
-  { id: 4,  ticketId: 'QL-4824', name: 'Chidi Okafor',     position: 4,  status: 'waiting',  channel: 'app',    waitTime: 12, eta: '9:14 AM' },
-  { id: 5,  ticketId: 'QL-4825', name: 'Aisha Mensah',     position: 5,  status: 'waiting',  channel: 'walkin', waitTime: 16, eta: '9:18 AM' },
-  { id: 6,  ticketId: 'QL-4826', name: 'Seun Adeleke',     position: 6,  status: 'waiting',  channel: 'qr',     waitTime: 20, eta: '9:22 AM' },
-  { id: 7,  ticketId: 'QL-4827', name: 'Nadia Touré',      position: 7,  status: 'waiting',  channel: 'sms',    waitTime: 24, eta: '9:26 AM' },
-  { id: 8,  ticketId: 'QL-4828', name: 'Emmanuel Boateng', position: 8,  status: 'delayed',  channel: 'app',    waitTime: 28, eta: '9:30 AM' },
-  { id: 9,  ticketId: 'QL-4829', name: 'Zainab Traoré',    position: 9,  status: 'waiting',  channel: 'ussd',   waitTime: 32, eta: '9:34 AM' },
-  { id: 10, ticketId: 'QL-4830', name: 'Kofi Acheampong',  position: 10, status: 'waiting',  channel: 'walkin', waitTime: 36, eta: '9:38 AM' },
-]
-
-const AI_INSIGHTS_POOL = [
-  { id: 1, type: 'warning', icon: 'TrendingUp',   title: 'Peak Traffic Incoming',    message: 'AI predicts 47% queue surge in 18 minutes. Recommend opening Counter 3.',      confidence: 91 },
-  { id: 2, type: 'info',    icon: 'Users',         title: 'Optimal Staff Allocation', message: 'Suggest adding 2 more agents to reduce average wait by ~6 minutes.',          confidence: 87 },
-  { id: 3, type: 'warning', icon: 'Clock',         title: 'Late Arrival Detected',    message: 'User QL-4828 (Emmanuel) has 72% probability of delay. Smart repositioned.',   confidence: 72 },
-  { id: 4, type: 'success', icon: 'Zap',           title: 'Efficiency Improved',      message: 'Queue throughput increased 23% since 8 AM. AI scheduling is working.',        confidence: 95 },
-  { id: 5, type: 'info',    icon: 'MapPin',        title: 'Geographic Cluster Alert', message: '8 users in Westlands area. SMS batch notification sent to stagger arrivals.', confidence: 83 },
-  { id: 6, type: 'warning', icon: 'AlertTriangle', title: 'Counter 2 Bottleneck',     message: 'Counter 2 processing 40% slower than average. Consider rebalancing.',         confidence: 89 },
-]
+const cloneInitialQueue = () => JSON.parse(JSON.stringify(INITIAL_LAB_QUEUE))
+const cloneInitialHistory = () => JSON.parse(JSON.stringify(INITIAL_SERVED_HISTORY))
 
 export const useQueueStore = create((set, get) => ({
-  queue:          INITIAL_QUEUE,
-  currentServing: 1,
-  totalToday:     127,
-  avgWaitTime:    14,
-  aiEfficiency:   87,
-  isOffline:      false,
-  isDemoMode:     false,
-  isDarkMode:     true,
-  aiInsights:     AI_INSIGHTS_POOL,
-  activeCounters: [
-    { id: 1, name: 'Counter A', staff: 'Grace Mutua', status: 'active', serving: 'QL-4821', avgTime: 4 },
-    { id: 2, name: 'Counter B', staff: 'Ibrahim Sow', status: 'active', serving: null,       avgTime: 6 },
-    { id: 3, name: 'Counter C', staff: 'Priya Nair',  status: 'idle',   serving: null,       avgTime: 4 },
-    { id: 4, name: 'Counter D', staff: '—',           status: 'closed', serving: null,       avgTime: 0 },
+  // Core Queue State
+  queue: cloneInitialQueue(),
+  servedHistory: cloneInitialHistory(),
+  servedToday: 86,
+  avgWaitTime: 31,
+  activeWindow: 'Window 2',
+  selectedService: 'Laboratory',
+
+  // Citizen-specific State
+  userTicket: null, // e.g. { ticketId: 'LAB-024', position: 13, waitTime: 38, status: 'waiting', service: 'Laboratory' }
+  citizenStep: 1, // 1: Choose Service, 2: Join Method, 3: USSD Dial, 4: My Queue, 5: Served
+  turnApproachingNotified: false,
+  isAwayFromClinic: false,
+  citizenDelayRequested: null, // null | 10 | 20
+  citizenStatusMessage: '',
+
+  // System & Offline State
+  isOffline: false,
+  pendingOfflineChanges: 0,
+  syncMessage: null,
+
+  // Staff Needs Attention / Audit
+  needsAttention: [
+    {
+      id: 'att-1',
+      ticketId: 'LAB-026',
+      patientName: 'Grace Mutoni',
+      channel: 'USSD',
+      currentPosition: 13,
+      requestedExtraMin: 20,
+      reason: 'Patient requested 20 extra minutes via USSD',
+      status: 'pending',
+    }
   ],
+  auditLogs: [
+    { id: 1, time: '09:18 AM', text: 'Patient LAB-026 requested 20 min extension via USSD (*384#).' }
+  ],
+
+  // In-app Notifications
   notifications: [],
-  userTicket:    null,
-  pendingSync:   0,
-  demoInterval:  null,
 
-  callNext: () => set((state) => {
-    const queue = state.queue.filter(u => u.status !== 'serving')
-    if (!queue.length) return {}
-    const next = queue.find(u => u.status === 'waiting' || u.status === 'delayed')
-    if (!next) return {}
-    const updated = state.queue.map(u => {
-      if (u.id === state.currentServing && u.status === 'serving') return { ...u, status: 'served' }
-      if (u.id === next.id) return { ...u, status: 'serving', position: 1 }
-      if (u.status === 'waiting' || u.status === 'delayed') return { ...u, position: u.position - 1 }
-      return u
-    }).filter(u => u.status !== 'served')
-    return {
-      queue:          updated,
-      currentServing: next.id,
-      totalToday:     state.totalToday + 1,
-      avgWaitTime:    Math.max(8, state.avgWaitTime - 1),
-    }
-  }),
+  // --------------------------------------------------------------------------
+  // CITIZEN ACTIONS
+  // --------------------------------------------------------------------------
+  setCitizenStep: (step) => set({ citizenStep: step }),
 
-  addWalkIn: (name) => set((state) => {
-    const newUser = {
-      id:       Date.now(),
-      ticketId: generateTicketId(),
-      name,
-      position: state.queue.length + 1,
-      status:   'waiting',
-      channel:  'walkin',
-      waitTime: estimateWait(state.queue.length + 1),
-      eta:      '—',
-    }
-    return {
-      queue: [...state.queue, newUser],
-      notifications: [
-        { id: Date.now(), type: 'success', message: `Walk-in added: ${name} → ${newUser.ticketId}` },
-        ...state.notifications,
-      ],
-    }
-  }),
+  setSelectedService: (service) => set({ selectedService: service }),
 
-  joinQueue: (name, channel = 'app') => {
+  // Citizen joins via USSD (or other channels)
+  joinQueueAsCitizen: (channel = 'USSD', name = 'Citizen (You)') => {
     const state = get()
-    const newUser = {
-      id:       Date.now(),
-      ticketId: generateTicketId(),
-      name,
-      position: state.queue.length + 1,
-      status:   'waiting',
-      channel,
-      waitTime: estimateWait(state.queue.length + 1),
-      eta:      '—',
+    // Specifically produce LAB-024 with position #13 if first time in pitch scenario
+    const existingIndex = state.queue.findIndex(t => t.ticketId === 'LAB-024')
+    let ticket
+    if (existingIndex >= 0) {
+      ticket = state.queue[existingIndex]
+    } else {
+      const newPos = state.queue.length + 1
+      ticket = {
+        id: Date.now(),
+        ticketId: 'LAB-024',
+        name,
+        position: 13, // Explicit pitch requirement: LAB-024, Position #13, ~38 min
+        status: 'waiting',
+        channel,
+        service: state.selectedService || 'Laboratory',
+        waitTime: 38,
+        joinedAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      }
+      
+      const newQueue = [...state.queue, ticket].sort((a, b) => a.position - b.position)
+      set({
+        queue: newQueue,
+        userTicket: ticket,
+        citizenStep: 4,
+        notifications: [
+          {
+            id: Date.now(),
+            type: 'success',
+            message: `Ticket issued: ${ticket.ticketId}. Position #${ticket.position} in ${ticket.service}.`,
+          },
+          ...state.notifications,
+        ],
+      })
+      return ticket
     }
-    set(s => ({
-      queue: [...s.queue, newUser],
-      userTicket: newUser,
-      notifications: [
-        { id: Date.now(), type: 'success', message: `You joined the queue! Ticket: ${newUser.ticketId}` },
-        ...s.notifications,
-      ],
-    }))
-    return newUser
+
+    set({ userTicket: ticket, citizenStep: 4 })
+    return ticket
   },
 
-  repositionDelayed: (userId) => set((state) => ({
-    queue: state.queue.map(u =>
-      u.id === userId
-        ? { ...u, status: 'waiting', position: Math.min(u.position + 3, state.queue.length) }
-        : u
-    ),
+  toggleAwayFromClinic: () => set((state) => ({
+    isAwayFromClinic: !state.isAwayFromClinic,
     notifications: [
-      { id: Date.now(), type: 'info', message: 'AI smart-repositioned delayed user' },
+      {
+        id: Date.now(),
+        type: 'info',
+        message: !state.isAwayFromClinic
+          ? 'You indicated you are leaving the waiting room. We will SMS you when 3 people remain.'
+          : 'You are back in the waiting area.',
+      },
       ...state.notifications,
     ],
   })),
 
-  toggleOffline: () => set((state) => {
-    const offline = !state.isOffline
-    return {
-      isOffline:    offline,
-      pendingSync:  offline ? 0 : state.pendingSync,
+  // Citizen requests delay (Fair-Late rule)
+  citizenRequestDelay: (extraMinutes = 20) => {
+    const state = get()
+    if (!state.userTicket) return
+
+    const ticketId = state.userTicket.ticketId
+    // Position shift by rule (+3 positions or to position 15)
+    const newPosition = Math.min(state.queue.length, (state.userTicket.position || 2) + 3)
+    
+    // Update queue
+    const updatedQueue = state.queue.map(t => {
+      if (t.ticketId === ticketId) {
+        return {
+          ...t,
+          status: 'delayed',
+          position: newPosition,
+          waitTime: (t.waitTime || 8) + extraMinutes,
+          delayReason: `Patient requested ${extraMinutes} extra minutes`,
+        }
+      }
+      return t
+    }).sort((a, b) => a.position - b.position)
+
+    const updatedUserTicket = updatedQueue.find(t => t.ticketId === ticketId)
+
+    // Add to staff attention queue
+    const attentionItem = {
+      id: `att-${Date.now()}`,
+      ticketId,
+      patientName: state.userTicket.name || 'Citizen (You)',
+      channel: state.userTicket.channel || 'USSD',
+      currentPosition: newPosition,
+      requestedExtraMin: extraMinutes,
+      reason: `Patient requested ${extraMinutes} extra minutes via ${state.userTicket.channel || 'USSD'}`,
+      status: 'pending',
+    }
+
+    const auditEntry = {
+      id: Date.now(),
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      text: `Position adjusted by staff fairness rule: ${ticketId} shifted from #${state.userTicket.position} to #${newPosition} (+${extraMinutes}m).`,
+    }
+
+    set({
+      queue: updatedQueue,
+      userTicket: updatedUserTicket,
+      citizenDelayRequested: extraMinutes,
+      turnApproachingNotified: false,
+      needsAttention: [attentionItem, ...state.needsAttention.filter(a => a.ticketId !== ticketId)],
+      auditLogs: [auditEntry, ...state.auditLogs],
       notifications: [
         {
-          id:      Date.now(),
-          type:    offline ? 'warning' : 'success',
-          message: offline
-            ? 'Offline mode activated. Queue cached locally.'
-            : `Back online. Syncing ${state.pendingSync} records…`,
+          id: Date.now(),
+          type: 'warning',
+          message: `Your place has been adjusted. New position: #${newPosition}. Estimated wait extended by ${extraMinutes} min.`,
         },
         ...state.notifications,
       ],
-    }
-  }),
-
-  simulateOfflineChange: () => set((state) => ({
-    pendingSync: state.isOffline ? state.pendingSync + 1 : state.pendingSync,
-  })),
-
-  toggleDarkMode: () => set((state) => {
-    const dark = !state.isDarkMode
-    if (dark) document.documentElement.classList.add('dark')
-    else      document.documentElement.classList.remove('dark')
-    return { isDarkMode: dark }
-  }),
-
-  startDemo: () => {
-    const names = [
-      'Ama Owusu',      'Tariq Hassan',   'Lindiwe Dlamini', 'Olumide Bello',
-      'Mariama Diallo', 'Yaw Boateng',    'Ngozi Adeyemi',   'Sione Tuilagi',
-    ]
-    let i = 0
-    const interval = setInterval(() => {
-      get().callNext()
-      if (i < names.length) {
-        get().addWalkIn(names[i++])
-      }
-    }, 2500)
-    set({ isDemoMode: true, demoInterval: interval })
+    })
   },
 
-  stopDemo: () => {
-    const { demoInterval } = get()
-    if (demoInterval) clearInterval(demoInterval)
-    set({ isDemoMode: false, demoInterval: null })
+  // Citizen acknowledges return
+  citizenReturning: () => {
+    const state = get()
+    if (!state.userTicket) return
+    const ticketId = state.userTicket.ticketId
+
+    const updatedQueue = state.queue.map(t => {
+      if (t.ticketId === ticketId) {
+        return { ...t, status: 'returning' }
+      }
+      return t
+    })
+
+    set({
+      queue: updatedQueue,
+      userTicket: { ...state.userTicket, status: 'returning' },
+      notifications: [
+        {
+          id: Date.now(),
+          type: 'success',
+          message: 'Status updated: Returning to Laboratory Window 2. Staff notified.',
+        },
+        ...state.notifications,
+      ],
+    })
+  },
+
+  // --------------------------------------------------------------------------
+  // STAFF ACTIONS
+  // --------------------------------------------------------------------------
+  callNext: () => {
+    const state = get()
+    const activeQueue = [...state.queue]
+    const currentServing = activeQueue.find(t => t.status === 'serving')
+
+    // Find next ticket to serve: first waiting or returning ticket
+    const nextToServeIndex = activeQueue.findIndex(t => t.status === 'waiting' || t.status === 'delayed' || t.status === 'returning')
+    if (nextToServeIndex === -1 && !currentServing) return
+
+    let updatedHistory = [...state.servedHistory]
+    let newServedCount = state.servedToday
+
+    // Archive current serving
+    if (currentServing) {
+      updatedHistory.unshift({
+        ticketId: currentServing.ticketId,
+        name: currentServing.name,
+        service: currentServing.service,
+        channel: currentServing.channel,
+        waitTime: `${currentServing.waitTime || 28} min`,
+        servedTime: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        window: state.activeWindow,
+      })
+      newServedCount += 1
+    }
+
+    // Remove old serving ticket from active queue
+    let remainingQueue = activeQueue.filter(t => t.status !== 'serving')
+
+    // Promote next ticket to serving
+    if (remainingQueue.length > 0) {
+      const nextTicket = remainingQueue[0]
+      remainingQueue[0] = {
+        ...nextTicket,
+        status: 'serving',
+        position: 1,
+        window: state.activeWindow,
+      }
+
+      // Re-index remaining tickets
+      for (let i = 1; i < remainingQueue.length; i++) {
+        remainingQueue[i] = {
+          ...remainingQueue[i],
+          position: i + 1,
+          waitTime: Math.max(2, (remainingQueue[i].waitTime || 10) - 3),
+        }
+      }
+    }
+
+    // Check citizen ticket updates
+    let updatedUserTicket = state.userTicket
+    let turnApproaching = state.turnApproachingNotified
+
+    if (state.userTicket) {
+      const foundInQueue = remainingQueue.find(t => t.ticketId === state.userTicket.ticketId)
+      if (foundInQueue) {
+        updatedUserTicket = { ...foundInQueue }
+        // Trigger approach notification if position <= 2 and not yet notified
+        if (foundInQueue.position <= 2 && foundInQueue.status !== 'serving') {
+          turnApproaching = true
+        }
+      } else {
+        // Was it the one just served?
+        if (currentServing && currentServing.ticketId === state.userTicket.ticketId) {
+          updatedUserTicket = { ...currentServing, status: 'served' }
+        }
+      }
+    }
+
+    const offlineInc = state.isOffline ? state.pendingOfflineChanges + 1 : state.pendingOfflineChanges
+
+    set({
+      queue: remainingQueue,
+      servedHistory: updatedHistory,
+      servedToday: newServedCount,
+      userTicket: updatedUserTicket,
+      turnApproachingNotified: turnApproaching,
+      pendingOfflineChanges: offlineInc,
+      avgWaitTime: Math.max(12, Math.round(remainingQueue.length * 2.8)),
+      notifications: [
+        {
+          id: Date.now(),
+          type: 'info',
+          message: remainingQueue[0]
+            ? `Now Serving: ${remainingQueue[0].ticketId} at ${state.activeWindow}`
+            : 'All queued patients have been served.',
+        },
+        ...state.notifications,
+      ],
+    })
+  },
+
+  completeCurrentServing: () => {
+    const state = get()
+    const current = state.queue.find(t => t.status === 'serving')
+    if (!current) return
+
+    const newHistory = [
+      {
+        ticketId: current.ticketId,
+        name: current.name,
+        service: current.service,
+        channel: current.channel,
+        waitTime: `${current.waitTime || 30} min`,
+        servedTime: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        window: state.activeWindow,
+      },
+      ...state.servedHistory,
+    ]
+
+    const remaining = state.queue.filter(t => t.id !== current.id)
+    let updatedUserTicket = state.userTicket
+    if (state.userTicket && state.userTicket.ticketId === current.ticketId) {
+      updatedUserTicket = { ...current, status: 'served' }
+    }
+
+    const offlineInc = state.isOffline ? state.pendingOfflineChanges + 1 : state.pendingOfflineChanges
+
+    set({
+      queue: remaining,
+      servedHistory: newHistory,
+      servedToday: state.servedToday + 1,
+      userTicket: updatedUserTicket,
+      pendingOfflineChanges: offlineInc,
+      notifications: [
+        {
+          id: Date.now(),
+          type: 'success',
+          message: `Ticket ${current.ticketId} marked as completed.`,
+        },
+        ...state.notifications,
+      ],
+    })
+  },
+
+  // Register Walk-in (staff desk)
+  addWalkIn: (name, phone = '', service = 'Laboratory') => {
+    const state = get()
+    const ticketNumber = `LAB-0${String(state.servedToday + state.queue.length + 1).slice(-2)}` || `LAB-027`
+    const position = state.queue.length + 1
+    const newPatient = {
+      id: Date.now(),
+      ticketId: ticketNumber,
+      name: name.trim() || `Walk-in Patient #${position}`,
+      phone: phone.trim() || 'No phone registered',
+      position,
+      status: 'waiting',
+      channel: 'Walk-in',
+      service,
+      waitTime: Math.max(5, position * 3),
+      joinedAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    }
+
+    const offlineInc = state.isOffline ? state.pendingOfflineChanges + 1 : state.pendingOfflineChanges
+
+    set({
+      queue: [...state.queue, newPatient],
+      pendingOfflineChanges: offlineInc,
+      notifications: [
+        {
+          id: Date.now(),
+          type: 'success',
+          message: `Walk-in registered: ${newPatient.ticketId} (#${position}) printed for ${newPatient.name}.`,
+        },
+        ...state.notifications,
+      ],
+    })
+    return newPatient
+  },
+
+  // Staff resolves late arrival attention
+  adjustLatePosition: (ticketId, shift = 3) => {
+    const state = get()
+    const target = state.queue.find(t => t.ticketId === ticketId)
+    if (!target) return
+
+    const oldPos = target.position
+    const newPos = Math.min(state.queue.length, oldPos + shift)
+
+    const updatedQueue = state.queue.map(t => {
+      if (t.ticketId === ticketId) {
+        return { ...t, position: newPos, status: 'waiting' }
+      }
+      return t
+    }).sort((a, b) => a.position - b.position)
+
+    const auditEntry = {
+      id: Date.now(),
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      text: `Position adjusted by staff rule: ${ticketId} moved from #${oldPos} to #${newPos}.`,
+    }
+
+    set({
+      queue: updatedQueue,
+      needsAttention: state.needsAttention.filter(a => a.ticketId !== ticketId),
+      auditLogs: [auditEntry, ...state.auditLogs],
+      notifications: [
+        {
+          id: Date.now(),
+          type: 'info',
+          message: `Position adjusted by staff rule: ${ticketId} shifted to #${newPos}.`,
+        },
+        ...state.notifications,
+      ],
+    })
+  },
+
+  keepLatePosition: (ticketId) => {
+    const state = get()
+    const auditEntry = {
+      id: Date.now(),
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      text: `Staff approved retaining position for ${ticketId}.`,
+    }
+
+    set({
+      needsAttention: state.needsAttention.filter(a => a.ticketId !== ticketId),
+      auditLogs: [auditEntry, ...state.auditLogs],
+      notifications: [
+        {
+          id: Date.now(),
+          type: 'info',
+          message: `Retained existing queue position for ${ticketId}.`,
+        },
+        ...state.notifications,
+      ],
+    })
+  },
+
+  // --------------------------------------------------------------------------
+  // OFFLINE & CONNECTIVITY
+  // --------------------------------------------------------------------------
+  toggleOffline: () => {
+    const state = get()
+    const nextOffline = !state.isOffline
+    if (!nextOffline && state.pendingOfflineChanges > 0) {
+      // Reconnected and syncing
+      const syncCount = state.pendingOfflineChanges
+      set({
+        isOffline: false,
+        pendingOfflineChanges: 0,
+        syncMessage: `Connection restored — ${syncCount} changes synchronized with Kigali Hospital core server.`,
+        notifications: [
+          {
+            id: Date.now(),
+            type: 'success',
+            message: `Connection restored — ${syncCount} changes synchronized.`,
+          },
+          ...state.notifications,
+        ],
+      })
+      setTimeout(() => set({ syncMessage: null }), 6000)
+    } else {
+      set({
+        isOffline: nextOffline,
+        notifications: [
+          {
+            id: Date.now(),
+            type: nextOffline ? 'warning' : 'info',
+            message: nextOffline
+              ? 'Offline mode active — Local queue engine operating on device cache.'
+              : 'Connection online. Edge gateway synchronized.',
+          },
+          ...state.notifications,
+        ],
+      })
+    }
+  },
+
+  restoreConnection: () => {
+    const state = get()
+    const count = state.pendingOfflineChanges
+    set({
+      isOffline: false,
+      pendingOfflineChanges: 0,
+      syncMessage: `Connection restored — ${count} changes synchronized.`,
+      notifications: [
+        {
+          id: Date.now(),
+          type: 'success',
+          message: `Connection restored — ${count} changes synchronized.`,
+        },
+        ...state.notifications,
+      ],
+    })
+    setTimeout(() => set({ syncMessage: null }), 6000)
+  },
+
+  // --------------------------------------------------------------------------
+  // PITCH / DEMO CONTROLS
+  // --------------------------------------------------------------------------
+  resetDemo: () => {
+    set({
+      queue: cloneInitialQueue(),
+      servedHistory: cloneInitialHistory(),
+      servedToday: 86,
+      avgWaitTime: 31,
+      userTicket: null,
+      citizenStep: 1,
+      turnApproachingNotified: false,
+      isAwayFromClinic: false,
+      citizenDelayRequested: null,
+      citizenStatusMessage: '',
+      isOffline: false,
+      pendingOfflineChanges: 0,
+      syncMessage: null,
+      needsAttention: [
+        {
+          id: 'att-1',
+          ticketId: 'LAB-026',
+          patientName: 'Grace Mutoni',
+          channel: 'USSD',
+          currentPosition: 13,
+          requestedExtraMin: 20,
+          reason: 'Patient requested 20 extra minutes via USSD',
+          status: 'pending',
+        }
+      ],
+      auditLogs: [
+        { id: 1, time: '09:18 AM', text: 'Patient LAB-026 requested 20 min extension via USSD (*384#).' }
+      ],
+      notifications: [
+        {
+          id: Date.now(),
+          type: 'info',
+          message: 'Demo state reset to clean scenario (Kigali Hospital — Laboratory).',
+        }
+      ],
+    })
   },
 
   dismissNotification: (id) => set((state) => ({

@@ -1,76 +1,79 @@
 import { Link } from 'react-router-dom'
-import { Github, Twitter, Linkedin, Mail, MapPin } from 'lucide-react'
+import { Building2, Shield, Wifi, Smartphone, Radio } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 mt-24">
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-
-          {/* Brand */}
-          <div className="md:col-span-1">
-            <div className="flex items-center gap-2.5 mb-4">
-              <img src="/qline-logo.png" alt="QLine Logo" className="w-9 h-9 object-contain" />
-              <span className="font-display font-black text-xl gradient-text">QLine</span>
+    <footer className="bg-white border-t border-[#DDE3E2] mt-20 text-[#66757A] text-xs">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          
+          {/* Column 1: Product Purpose */}
+          <div className="md:col-span-2">
+            <div className="flex items-center gap-2 mb-2.5">
+              <img src="/qline-logo.png" alt="QLine" className="w-6 h-6 object-contain" />
+              <span className="font-semibold text-sm text-[#132A32]">QLine Public Service Platform</span>
             </div>
-            <p className="text-slate-400 text-sm leading-relaxed mb-6">
-              AI-powered queue management built for Africa. Transforming how people wait — one queue at a time.
+            <p className="text-xs leading-relaxed max-w-md text-[#66757A] mb-3">
+              "Your place in line, without standing in line." An inclusive queue management system designed for African hospitals, government centers, and banks, operating seamlessly with USSD, SMS, web, and offline-first local edge sync.
             </p>
-            <div className="flex items-center gap-2 text-slate-500 text-sm mb-2">
-              <MapPin size={13} />KN 4 Ave, Nyarugenge, Kigali
-            </div>
-            <div className="flex items-center gap-2 text-slate-500 text-sm">
-              <Mail size={13} /> partners@qline.rw
+            <div className="flex items-center gap-2 text-[11px] text-[#66757A]">
+              <span className="inline-block w-2 h-2 rounded-full bg-[#167A5B]"></span>
+              <span>Pilot Demo: Kigali Hospital Outpatient & Diagnostic Services</span>
             </div>
           </div>
 
-          {/* Product */}
+          {/* Column 2: Supported Channels */}
           <div>
-            <h4 className="font-semibold text-white mb-4 text-sm">Product</h4>
-            <ul className="space-y-3 text-sm text-slate-400">
-              {['Features', 'AI Engine', 'Pricing', 'Changelog', 'Roadmap', 'Status'].map(item => (
-                <li key={item}><a href="#" className="hover:text-white transition-colors">{item}</a></li>
-              ))}
+            <h4 className="font-semibold text-[#172126] text-xs uppercase tracking-wider mb-2.5">Inclusion Channels</h4>
+            <ul className="space-y-1.5 text-xs text-[#66757A]">
+              <li className="flex items-center gap-1.5">
+                <Radio size={12} className="text-[#0A6A6C]" /> USSD Gateway (*384#)
+              </li>
+              <li className="flex items-center gap-1.5">
+                <Smartphone size={12} className="text-[#0A6A6C]" /> Two-Way SMS Notifications
+              </li>
+              <li className="flex items-center gap-1.5">
+                <Building2 size={12} className="text-[#0A6A6C]" /> Walk-in Reception Desk
+              </li>
+              <li className="flex items-center gap-1.5">
+                <Wifi size={12} className="text-[#0A6A6C]" /> Local Offline Cache Engine
+              </li>
             </ul>
           </div>
 
-          {/* Solutions */}
+          {/* Column 3: Fast Navigation */}
           <div>
-            <h4 className="font-semibold text-white mb-4 text-sm">Solutions</h4>
-            <ul className="space-y-3 text-sm text-slate-400">
-              {['Healthcare', 'Banking', 'Government', 'Education', 'Retail', 'Enterprise'].map(item => (
-                <li key={item}><a href="#" className="hover:text-white transition-colors">{item}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h4 className="font-semibold text-white mb-4 text-sm">Company</h4>
-            <ul className="space-y-3 text-sm text-slate-400">
-              {['About Us', 'Careers', 'Blog', 'Press Kit', 'Privacy Policy', 'Terms of Service'].map(item => (
-                <li key={item}><a href="#" className="hover:text-white transition-colors">{item}</a></li>
-              ))}
+            <h4 className="font-semibold text-[#172126] text-xs uppercase tracking-wider mb-2.5">Demo Navigation</h4>
+            <ul className="space-y-1.5 text-xs">
+              <li>
+                <Link to="/queue" className="hover:text-[#0A6A6C] transition-colors">Citizen Mode (Join via USSD)</Link>
+              </li>
+              <li>
+                <Link to="/dashboard" className="hover:text-[#0A6A6C] transition-colors">Staff Operations (Live Queue)</Link>
+              </li>
+              <li>
+                <Link to="/services" className="hover:text-[#0A6A6C] transition-colors">Hospital Windows & Counters</Link>
+              </li>
+              <li>
+                <Link to="/analytics" className="hover:text-[#0A6A6C] transition-colors">Operational Insights & Stats</Link>
+              </li>
+              <li>
+                <Link to="/connectivity" className="hover:text-[#0A6A6C] transition-colors">System Connectivity & Offline Sync</Link>
+              </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-white/5 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-slate-500 text-sm">© 2025 QLine Technologies Ltd. All rights reserved.</p>
+        <div className="border-t border-[#EDF1F0] mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#66757A]">
+          <div>
+            © 2026 QLine Rwanda Prototype · Student Entrepreneurship Demo · Kigali, Rwanda
+          </div>
           <div className="flex items-center gap-4">
-            {[
-              { Icon: Twitter,  href: '#' },
-              { Icon: Linkedin, href: '#' },
-              { Icon: Github,   href: '#' },
-            ].map(({ Icon, href }, i) => (
-              <a
-                key={i}
-                href={href}
-                className="p-2 rounded-lg text-slate-500 hover:text-white hover:bg-white/10 transition-all"
-              >
-                <Icon size={16} />
-              </a>
-            ))}
+            <span>Rules-first Queue Fairness</span>
+            <span>·</span>
+            <span>Local SQLite Edge Sync</span>
+            <span>·</span>
+            <span>Zero Smartphone Dependency</span>
           </div>
         </div>
       </div>
