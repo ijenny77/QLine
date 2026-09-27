@@ -1,0 +1,998 @@
+You are rebuilding the existing QLine React/Vite application into a polished, realistic, working product prototype for a high-stakes student entrepreneurship competition.
+
+IMPORTANT:
+Do NOT start a new project.
+Do NOT throw away the existing architecture.
+Inspect the existing codebase first and modify the current application.
+
+The existing project already uses:
+
+* React
+* Vite
+* React Router
+* Zustand
+* Framer Motion
+* Lucide React
+* Recharts
+
+The current application looks too AI-generated and generic. It has excessive SaaS styling, dark dashboards, gradients, pills, rounded cards, fake AI features, and an unrealistic visual language.
+
+We need to transform it into a credible African public-service queue management product called QLine.
+
+==================================================
+
+1. PRODUCT PURPOSE
+   ==================================================
+
+QLine is a digital queue management system for hospitals, banks and government/public-service offices.
+
+Core idea:
+
+"Your place in line, without standing in line."
+
+A citizen should be able to:
+
+1. Choose a service.
+2. Join a queue using a phone.
+3. Receive a ticket number and estimated waiting time.
+4. Leave the waiting area.
+5. Receive a notification when their turn is approaching.
+6. Return and be served.
+7. Track their position.
+
+The institution should be able to:
+
+1. See the live queue.
+2. Register walk-ins.
+3. Call the next person.
+4. Mark people as served.
+5. Handle late arrivals.
+6. See basic queue statistics.
+7. Continue operating during a simulated connectivity outage.
+
+This is a PRODUCT DEMO, not a marketing website.
+
+==================================================
+2. CRITICAL VISUAL DIRECTION
+============================
+
+Completely redesign the visual language.
+
+The current visual style must NOT remain.
+
+Do NOT use:
+
+* purple
+* neon gradients
+* gradient text
+* glassmorphism
+* excessive rounded cards
+* giant floating cards
+* excessive pills
+* colorful AI dashboards
+* cartoon illustrations
+* futuristic "AI" aesthetics
+* excessive animations
+* huge shadows
+* excessive border radius
+* dark cyberpunk UI
+* generic startup landing-page aesthetics
+
+The product should look like serious enterprise/public-service software.
+
+Think:
+
+* modern hospital information system
+* banking operations software
+* premium government service platform
+* professional African technology company
+
+The interface should feel trustworthy, calm and operational.
+
+Use a restrained visual system:
+
+Primary:
+#0A6A6C — QLine teal
+
+Dark:
+#132A32 — deep navy/blue-black
+
+Background:
+#F6F7F5 — warm off-white
+
+Surface:
+#FFFFFF
+
+Text:
+#172126
+
+Secondary text:
+#66757A
+
+Border:
+#DDE3E2
+
+Success:
+#167A5B
+
+Warning:
+#B7791F
+
+Danger:
+#B83A3A
+
+Use teal sparingly for important actions and active states.
+
+Typography:
+Use a professional sans-serif such as IBM Plex Sans, Inter, or another clean enterprise font.
+
+Do NOT use Quicksand.
+
+Border radius:
+Keep it restrained.
+Use approximately 2px–6px.
+Buttons can have 4px–6px.
+Cards should mostly be square/very slightly rounded.
+
+The interface should look designed, not generated.
+
+==================================================
+3. REMOVE THE CURRENT GENERIC SAAS NAVIGATION
+=============================================
+
+The current navigation contains:
+Home
+My Queue
+Dashboard
+Analytics
+AI Engine
+
+This feels like a marketing SaaS product.
+
+Replace it with a real product structure.
+
+Primary navigation:
+
+QLine logo
+
+Operations
+
+* Live Queue
+* Services
+* History
+
+Insights
+
+* Overview
+
+System
+
+* Connectivity
+
+And a clear institution selector:
+
+"Kigali Hospital — Demo"
+
+Add a small:
+"DEMO ENVIRONMENT"
+
+Do not imply that QLine is currently deployed at a real hospital.
+
+==================================================
+4. CREATE TWO REAL DEMO EXPERIENCES
+===================================
+
+The product must have two modes.
+
+MODE A:
+Citizen
+
+MODE B:
+Staff
+
+Put a simple switcher on the landing/demo entry:
+
+"I'M A CITIZEN"
+"I'M STAFF"
+
+This allows judges to immediately understand the two sides of QLine.
+
+==================================================
+5. CITIZEN EXPERIENCE
+=====================
+
+Build a very simple, realistic flow.
+
+SCREEN 1 — Choose Service
+
+Header:
+
+QLine
+
+Kigali Hospital — Demo
+
+"How can we help you today?"
+
+Services:
+
+Outpatient Department
+Laboratory
+Pharmacy
+Registration
+Billing
+
+Each service should show:
+
+* service name
+* current queue size
+* approximate wait
+
+Example:
+
+Laboratory
+12 people waiting
+Approx. 38 min
+
+Use simple list rows rather than giant cards.
+
+The user selects Laboratory.
+
+---
+
+## SCREEN 2 — Join Queue
+
+Show:
+
+Laboratory
+
+Current wait:
+~38 minutes
+
+"How would you like to join?"
+
+Buttons:
+
+USSD
+SMS
+QR / Web
+Staff registration
+
+Make USSD the primary demonstration because this is one of QLine's strongest inclusion features.
+
+Clicking USSD should open a realistic phone/USSD simulation.
+
+---
+
+## SCREEN 3 — USSD SIMULATION
+
+Create a realistic feature-phone style interface.
+
+Header:
+
+QLine
+
+USSD
+
+Screen:
+
+QLine Services
+
+1. Join Queue
+2. Check Position
+3. Request More Time
+4. Cancel Ticket
+
+User selects:
+
+1
+
+Then:
+
+Select Service
+
+1. Laboratory
+2. Outpatient
+3. Pharmacy
+4. Billing
+
+User selects:
+
+1
+
+Then:
+
+Queue Joined
+
+Ticket:
+LAB-024
+
+Position:
+#13
+
+Estimated wait:
+~38 min
+
+"You will receive an SMS when your turn is near."
+
+Button:
+Done
+
+This should actually update the application state.
+
+---
+
+## SCREEN 4 — MY QUEUE
+
+After joining, show a clean queue-tracking screen.
+
+LABORATORY
+
+Your ticket
+
+LAB-024
+
+Position
+
+#13
+
+Estimated wait
+
+38 min
+
+Now serving:
+LAB-011
+
+A simple horizontal queue progress indicator.
+
+Then:
+
+"You can leave the waiting area."
+
+Large action:
+
+Leave the queue area
+
+Secondary:
+
+View queue details
+
+Do NOT make this look like a gaming interface.
+
+---
+
+## SCREEN 5 — RETURN NOTIFICATION
+
+Create a simulated notification event.
+
+When the staff side calls several people, the citizen's state should update.
+
+Example:
+
+"Your turn is approaching."
+
+LAB-024
+
+Estimated wait:
+8 minutes
+
+"Please return to Laboratory Window 2."
+
+Actions:
+
+I'm on my way
+
+I need more time
+
+The "I need more time" action should simulate QLine's late-arrival behavior.
+
+Example:
+
+"How much more time do you need?"
+
+10 minutes
+20 minutes
+
+After selecting 20 minutes:
+
+"Your place has been adjusted."
+
+"New position: #15"
+
+This demonstrates the Fair-Late concept.
+
+==================================================
+6. STAFF EXPERIENCE
+===================
+
+This is the most important screen for the institution.
+
+Build a serious operations dashboard.
+
+Header:
+
+QLine Operations
+
+Kigali Hospital — Demo
+
+Laboratory
+
+Status:
+LIVE
+
+Top summary:
+
+Waiting
+12
+
+Now Serving
+LAB-023
+
+Average Wait
+31 min
+
+Served Today
+86
+
+Do NOT use giant colorful statistic cards.
+
+Use a clean operational layout.
+
+---
+
+## LIVE QUEUE
+
+Table:
+
+Position
+Ticket
+Service
+Channel
+Status
+Wait
+Action
+
+Example:
+
+01 | LAB-023 | Laboratory | USSD | SERVING | — | Complete
+
+02 | LAB-024 | Laboratory | SMS | WAITING | 8 min | Call
+
+03 | LAB-025 | Laboratory | Walk-in | WAITING | 12 min | Call
+
+04 | LAB-026 | Laboratory | USSD | DELAYED | 20 min | Review
+
+Make the table extremely readable.
+
+---
+
+## PRIMARY STAFF ACTION
+
+Large but restrained button:
+
+CALL NEXT
+
+When clicked:
+
+* current serving becomes served
+* next person becomes serving
+* queue positions update
+* citizen's queue updates
+* notification appears
+* counters update
+
+This interaction must actually work.
+
+Do not fake it with an animation only.
+
+==================================================
+7. STAFF WALK-IN REGISTRATION
+=============================
+
+Add:
+
+* Register Walk-in
+
+Form:
+
+Name
+Phone number
+Service
+
+Then:
+
+Create Ticket
+
+Example result:
+
+Ticket created
+
+LAB-027
+
+Position #16
+
+Channel:
+Walk-in
+
+This demonstrates that people without phones are not excluded.
+
+==================================================
+8. LATE ARRIVAL / FAIRNESS
+==========================
+
+Create a small "Needs attention" area.
+
+Example:
+
+LAB-026
+Patient requested 20 extra minutes.
+
+Actions:
+
+Keep position
+Adjust position
+
+If adjusted:
+
+Position changes from #4 to #7.
+
+Show a small audit message:
+
+"Position adjusted by staff rule."
+
+Do NOT call everything AI.
+
+The QLine report specifically describes the fairness engine as rules-first.
+
+==================================================
+9. OFFLINE MODE
+===============
+
+Add a connectivity indicator in the staff interface:
+
+ONLINE
+
+Click it to simulate:
+
+OFFLINE
+
+When offline:
+
+"Local queue active"
+
+"Changes will sync when connectivity returns."
+
+The queue must continue working while offline.
+
+Calling the next person should still work.
+
+Registering a walk-in should still work.
+
+When the user clicks:
+
+RESTORE CONNECTION
+
+show:
+
+"Connection restored"
+
+"4 changes synchronized"
+
+This is a major part of the product story.
+
+==================================================
+10. ANALYTICS
+=============
+
+Do NOT create an exaggerated AI analytics page.
+
+Create one clean "Overview" page.
+
+Show:
+
+Today's volume
+86 served
+
+Average wait
+31 min
+
+Abandoned visits
+7
+
+Peak period
+10:00–12:00
+
+Then a simple line/bar chart showing queue volume throughout the day.
+
+Use realistic demo data.
+
+No fake claims like:
+"AI efficiency 97%"
+"98.7% prediction accuracy"
+unless these are explicitly demonstrated and supported.
+
+The judges should see operational data, not marketing numbers.
+
+==================================================
+11. AI
+======
+
+AI should NOT dominate the product.
+
+QLine is primarily a queue management system.
+
+If an AI/insight feature is retained, call it:
+
+Operational Insight
+
+Example:
+
+"Queue volume is increasing."
+
+"Consider opening another service window."
+
+Do not use:
+AI ENGINE
+AI MAGIC
+AI POWERED
+97% CONFIDENCE
+neon brain graphics
+
+The product should feel useful even without AI.
+
+==================================================
+12. RWANDA CONTEXT
+==================
+
+Remove foreign institutions from the visible demo.
+
+Do NOT show:
+Equity Bank Nairobi
+I&M Bank
+KCB Kenya
+Absa Kenya
+Westlands
+Nairobi
+
+The competition is Rwanda-focused.
+
+Use:
+
+Kigali Hospital — Demo
+
+Services:
+Laboratory
+Outpatient
+Pharmacy
+Registration
+Billing
+
+Use:
+RWF
+
+Use:
+Kinyarwanda / English where appropriate.
+
+The system should visually communicate that it was designed for Rwanda and African public services.
+
+Do not claim that QLine is already partnered with a real hospital.
+
+==================================================
+13. DEMO SCENARIO
+=================
+
+Create a built-in demo scenario that can be reset.
+
+Add a small button:
+
+RESET DEMO
+
+The judge should be able to start from a clean state.
+
+Recommended live pitch flow:
+
+1. Open Citizen mode.
+2. Select Laboratory.
+3. Join using USSD.
+4. Receive LAB-024.
+5. Show position #13.
+6. Switch to Staff mode.
+7. Call next several people.
+8. Switch back to Citizen.
+9. Show position changing.
+10. Trigger "Your turn is approaching."
+11. Return to Staff.
+12. Show the ticket being called.
+13. Complete service.
+14. Show ticket as served.
+15. Toggle internet OFF.
+16. Call another customer.
+17. Show that the queue still works.
+18. Restore connection.
+
+The entire demo should take approximately 2–3 minutes.
+
+==================================================
+14. REAL STATE, NOT STATIC MOCKUPS
+==================================
+
+This is critical.
+
+Use the existing Zustand store or refactor it cleanly.
+
+Citizen and Staff must share the same queue state.
+
+For example:
+
+If staff clicks:
+
+CALL NEXT
+
+the citizen's position must change.
+
+If citizen selects:
+
+I NEED MORE TIME
+
+the staff queue must show the changed position/status.
+
+If staff completes:
+
+LAB-024
+
+the citizen should see:
+
+"Service completed."
+
+This shared state is what makes the prototype feel real.
+
+No backend is required for this competition demo.
+
+Local state is acceptable.
+
+But the interactions must actually work.
+
+==================================================
+15. REMOVE UNREALISTIC DATA
+===========================
+
+Remove fabricated testimonials such as:
+
+"CHUK Hospital reduced wait times by 58%"
+
+"Bank of Kigali customer satisfaction jumped..."
+
+"RRA processes 40% more taxpayers..."
+
+unless the team has actual evidence.
+
+Do not display invented partnerships, customers, deployment statistics or performance claims.
+
+Use clearly labelled demo data.
+
+This is a student competition prototype and we need credibility.
+
+==================================================
+16. LANDING PAGE
+================
+
+The landing page should NOT be a long marketing website.
+
+Make it a product entry screen.
+
+QLine logo
+
+"Your place in line, without standing in line."
+
+Short description:
+
+"Digital queue management for hospitals, banks and public services."
+
+Then two main actions:
+
+JOIN A QUEUE
+
+STAFF LOGIN
+
+Below:
+
+Works through:
+USSD · SMS · QR · Web · Staff Desk
+
+Then a small product preview.
+
+The judge should reach the actual product within one click.
+
+==================================================
+17. PRODUCT BRANDING
+====================
+
+Use the existing QLine logo asset if available.
+
+Do not redesign the logo inside the application.
+
+The QLine visual identity should be:
+
+Teal
+Deep navy
+White
+Warm neutral background
+
+Professional.
+Quiet.
+Trustworthy.
+African enterprise technology.
+
+Avoid making the interface look like a Silicon Valley AI startup.
+
+==================================================
+18. RESPONSIVE DESIGN
+=====================
+
+Primary target:
+
+Laptop / desktop.
+
+This is the environment in which judges will see the product.
+
+Make it work at:
+1280x720
+1366x768
+1440x900
+
+Do not create unnecessary mobile layouts.
+
+The citizen experience can visually simulate a phone/USSD interface inside the desktop application.
+
+==================================================
+19. ANIMATION
+=============
+
+Use animation only when it communicates state.
+
+Good:
+
+* queue position changing
+* notification appearing
+* status changing
+* page transitions
+* subtle loading
+* offline/online state
+
+Bad:
+
+* floating cards
+* excessive motion
+* bouncing icons
+* animated gradients
+* decorative particles
+
+Keep animations under 250–350ms where possible.
+
+==================================================
+20. CODE QUALITY
+================
+
+Do not simply hide the current styling.
+
+Actually refactor it.
+
+Remove:
+
+* unused components
+* fake AI content
+* fake testimonials
+* irrelevant Kenya data
+* unnecessary marketing sections
+* excessive gradients
+* dark-mode complexity if it is not needed
+* unnecessary pages
+
+Keep:
+
+* React
+* Vite
+* React Router
+* Zustand
+* Lucide
+* Framer Motion only where useful
+
+Do not introduce a backend.
+
+Do not introduce unnecessary dependencies.
+
+==================================================
+21. FINAL ACCEPTANCE TEST
+=========================
+
+Before finishing, test the following exact scenario:
+
+A citizen joins Laboratory through USSD.
+
+They receive:
+LAB-024
+Position #13
+Estimated wait.
+
+Staff dashboard shows LAB-024.
+
+Staff clicks CALL NEXT several times.
+
+Citizen position changes.
+
+Citizen clicks:
+"I need more time."
+
+Staff sees the delay.
+
+Citizen position is adjusted.
+
+Staff continues calling customers.
+
+Citizen receives:
+"Your turn is approaching."
+
+Citizen returns.
+
+Staff calls LAB-024.
+
+Staff completes LAB-024.
+
+Citizen sees:
+"Service completed."
+
+Staff switches the system offline.
+
+Staff registers a walk-in.
+
+Staff calls next.
+
+The queue still works.
+
+System is restored online.
+
+Show:
+"Changes synchronized."
+
+If any of these interactions do not work, fix them before finishing.
+
+==================================================
+22. FINAL COMMAND
+=================
+
+Build this as a polished, believable QLine product prototype.
+
+Do not make it look AI-generated.
+
+Do not make it look like a template.
+
+Do not make it look like a futuristic concept.
+
+Make it look like a real product that a hospital operations manager could understand immediately.
+
+Prioritize:
+
+1. Working queue flow
+2. Citizen experience
+3. Staff experience
+4. Shared state between both
+5. USSD simulation
+6. Notifications
+7. Late-arrival handling
+8. Offline mode
+9. Clean Rwanda-focused branding
+10. Professional visual design
+
+After implementation:
+
+* run npm install if required
+* run npm run build
+* fix every build error
+* test every route
+* test the complete citizen/staff demo flow
+* remove console errors
+* make sure there are no broken links
+* make sure the application starts correctly with npm run dev
+
+Do not stop at a visual redesign.
+The interactions must work.
+The demo must be ready for a judge to use immediately.
